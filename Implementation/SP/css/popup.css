@@ -1,0 +1,97 @@
+* {
+    font-family: "Roboto";
+    align-items: center;
+}
+#popup-wrap {
+    width: 300px;
+    height: 400px;
+}
+
+form {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#text-space {
+    width: 99%;
+}
+
+#title {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.button {
+    font-weight: lighter;
+    font-size: 80%;
+    border-radius: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    text-align: center;
+    background-color: #eeeeee;
+    border: thin solid #aaaaaa;
+    transition: 0.2s;
+}
+.button:hover {
+    background-color: #888888;
+    color: #80fca3;
+}
+
+input[type='submit']{
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+
+.table {
+    position: absolute;
+    width: inherit;
+    font-weight: lighter;
+    font-size: 80%;
+    border-radius: 10px;
+    margin-top: 2px;
+}
+
+.row {
+    position: inherit;
+    width: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    background-color: #eeeeee;
+    border: thin solid #aaaaaa;
+    border-radius: inherit;
+}
+
+.column {
+    width: 33.33%;
+    position: relative;
+    color: black;
+    text-align: center;
+    float: left;
+    border-radius: inherit;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    transition: 0.3s;
+}
+
+.column:hover{
+    background-color: #bbbbbb;
+    color: white;
+}
+
+.divider {
+    width: 1px;
+    height: 12px;
+    background-color: #bbbbbb;
+    float: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+}

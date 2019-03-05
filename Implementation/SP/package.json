@@ -1,0 +1,19 @@
+{
+  "name": "sp_project",
+  "version": "0.0.1",
+  "description": "Predictive text system implemented as a Chrome extension.",
+  "main": "js/background.js",
+  "scripts": {
+    "test": "on_install()"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalsayson/CMSC190.git"
+  },
+  "author": "John Alvin Sayson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jalsayson/CMSC190/issues"
+  },
+  "homepage": "https://github.com/jalsayson/CMSC190#readme"
+}
