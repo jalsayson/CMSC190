@@ -1,3 +1,101 @@
+class PTNode {
+    constructor(value){
+        this.value = value;
+        this.final = 0;
+        this.children = {};
+    }
+
+    hasChild(value){
+        var keys = Object.keys(this.children);
+        for(var key of keys) {
+            if(value == key) return true;
+        }
+        return false;
+    }
+
+    hasChildren(){
+        return Object.keys(this.children).length;
+    }
+
+    getChildren(){
+        return Object.keys(this.children);
+    }
+}
+
+class PrefixTree{
+    constructor(){
+        this.head = new PTNode(null);
+    }
+
+    insert(word){
+        var insert_helper = function(nav, word){
+            var keys = Object.keys(nav.children);
+            var check = true;
+            for(var key of keys){
+                if(key == word[0]){
+                    check = false;
+                    break;
+                }
+            }
+            if(check){
+                //insert node
+                nav.children[word[0]] = new PTNode(word[0]);
+            }
+            if(word.slice(1).length == 0) nav.children[word[0]].final = 1;
+            if(word.slice(1).length != 0) insert_helper(nav.children[word[0]], word.slice(1));
+        }
+        insert_helper(this.head, word);
+    }
+
+    print_all(){
+        var print_helper = function(nav, word){
+            if(nav.final){
+                console.log(word+nav.value);
+            }
+            var keys = Object.keys(nav.children);
+            for(var key of keys){
+                print_helper(nav.children[key], (nav.value != null?word+nav.value:word));
+            }
+        }
+        print_helper(this.head, "");
+    }
+
+    word_search(term){
+        var print_helper = function(nav, word){
+            if(nav.final){
+                // console.log(word+nav.value);
+                results = results.concat(word+nav.value);
+            }
+            if(!nav.hasChildren()) return;
+            for(var key of nav.getChildren()){
+                print_helper(nav.children[key], (nav.value != null?word+nav.value:word));
+            }
+        }
+        var nav = this.head;
+        var src = term;
+        var results = [];
+
+        if(term == "") {
+            print_helper(nav, "", results);
+        }
+
+        else{
+            while(src.length > 1){
+                if(nav.hasChild(src[0])){
+                    nav = nav.children[src[0]];
+                    src = src.slice(1);
+                }
+                else break;
+            }
+            if(!nav.hasChild(src[0])) return "empty";
+            print_helper(nav.children[src[0]], term.slice(0,term.length-1), results);
+        }
+
+        return results;
+    }
+
+}
+
 class NameProbabilityPair {
     constructor(name, value) {
         this.name = name;
@@ -127,7 +225,7 @@ const get_top_rankers = function(word, slots, matrix, chain, bag){
     return ranking;
 }
 
-const text_processing = function(){
+const initial_processing = function(){
     var entry = document.getElementById("text-space").value;
     var punc_free = clean_text(entry)
     var split_bag = create_bag(punc_free)
@@ -148,33 +246,47 @@ const caret_sens_text_check = function(){
     if(pos < 0) pos = 0;
     var current = "";
 
-    // console.log(entry.value[pos-1]);
-    // console.log(pos);
-
-    if(entry.value.length != 0){
+    if(entry.value.length != 0 && pos != 0){
         do{
-            current += entry.value[pos];
-            pos--;
-            if(entry.value[pos] == " " || entry.value[pos] == undefined) break;
-            if(pos < 0) break;
+            if(entry.value[pos] == " "){
+                pos--;
+                continue;
+            }
+            else{
+                current += entry.value[pos];
+                pos--;
+                if(entry.value[pos] == " " || entry.value[pos] == undefined) break;
+                if(pos < 0) break;
+            }
         } while(true);
         current = current.split("").reverse().join("");
     }
 
     console.log(current);
-    
+
     //now predict next word using current on a letter-level
+
+}
+
+const text_processing = function(){
+    var entry = document.getElementById("text-space").value;
+    var punc_free = clean_text(entry)
+    var split_bag = create_bag(punc_free)
+    var text_chain = convert_to_chain(punc_free)
+    var probabilities = gen_prob_matrix(split_bag, text_chain)
+    print_prob_matrix(probabilities)
 }
 
 const on_run = function(){
-    var src = document.getElementById("copy-button");
-    src.addEventListener("click", text_processing);
-
+    // var src = document.getElementById("copy-button");
+    // src.addEventListener("click", text_processing);
 
     var src2 = document.getElementById("text-space");
-    // src2.addEventListener("input", text_check);
     src2.addEventListener ("keyup", caret_sens_text_check);
     src2.addEventListener ("click", caret_sens_text_check);
+
+    var src3 = document.getElementById("begin-button");
+    src3.addEventListener("click", initial_processing);
 }
 
 // let current = "";

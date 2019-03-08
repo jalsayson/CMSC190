@@ -8,6 +8,7 @@
         "file:///*",
         "tabs",
         "webNavigation",
+        "storage",
         "declarativeContent"
     ],
     "background" : {

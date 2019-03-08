@@ -13,6 +13,10 @@ form {
     box-sizing: border-box;
 }
 
+.sub-button {
+
+}
+
 #text-space {
     width: 99%;
 }
@@ -22,6 +26,17 @@ form {
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+.oprow {
+    position: inherit;
+    width: inherit;
+}
+
+.opcolumn {
+    position: relative;
+    float:left;
+    width: 33%;
 }
 
 .button {
@@ -51,15 +66,17 @@ input[type='submit']{
 }
 
 .table {
-    position: absolute;
-    width: inherit;
+    position: inherit;
+    width: 99%;
     font-weight: lighter;
     font-size: 80%;
     border-radius: 10px;
     margin-top: 2px;
+    clear: both;
+    overflow: auto;
 }
 
-.row {
+.row, .oprow {
     position: inherit;
     width: inherit;
     font-weight: inherit;
@@ -67,10 +84,13 @@ input[type='submit']{
     background-color: #eeeeee;
     border: thin solid #aaaaaa;
     border-radius: inherit;
+    clear: inherit;
+    overflow: inherit;
 }
 
-.column {
-    width: 33.33%;
+.column, .opcolumn {
+    height: 100%;
+    width: 100%;
     position: relative;
     color: black;
     text-align: center;
@@ -81,7 +101,15 @@ input[type='submit']{
     transition: 0.3s;
 }
 
-.column:hover{
+.three {
+    width: 33.33%;
+}
+
+.opcolumn {
+    font-size: 50%;
+}
+
+.column:hover, .opcolumn:hover{
     background-color: #bbbbbb;
     color: white;
 }

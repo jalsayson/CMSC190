@@ -41,6 +41,7 @@ let on_install = function(){
     });
 };
 
+/*
 let on_input_detection = function(event){
     chrome.tabs.query(
         {
@@ -52,6 +53,7 @@ let on_input_detection = function(event){
                 {file: "extender.js"});
         });
 }
+*/
 
-chrome.webNavigation.onCompleted.addListener(on_input_detection);
+// chrome.webNavigation.onCompleted.addListener(on_input_detection);
 chrome.runtime.onInstalled.addListener(on_install);
