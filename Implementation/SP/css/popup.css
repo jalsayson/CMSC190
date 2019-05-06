@@ -54,7 +54,17 @@ form {
 }
 .button:hover {
     background-color: #888888;
-    color: #80fca3;
+    color: white;
+}
+
+.greenhover:hover {
+    background-color: #888888;
+    color: #80fca3 !important;
+}
+
+.redhover:hover {
+    background-color: #888888;
+    color: #ff5e5e !important;
 }
 
 input[type='submit']{

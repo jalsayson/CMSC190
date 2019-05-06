@@ -1,12 +1,3 @@
-/*
-DEVELOPMENT LINEUP:
-    - regex fix
-    - connecting code to frontend
-    - data saving to chrome storage
-    - option/settings page
-    - dynamic option count (determine max option)
-*/
-
 class NameProbabilityPair {
     constructor(name, value) {
         this.name = name;

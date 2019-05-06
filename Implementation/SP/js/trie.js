@@ -27,26 +27,6 @@ class PrefixTree{
         this.head = new PTNode(null);
     }
 
-    // insert(word){
-    //     var nav = this.head;
-    //     var src = word;
-    //     var hasProperty = function(object, property){
-    //         return Object.prototype.hasOwnProperty.call(object, property);
-    //     }
-    //     do {
-    //         console.log(src);
-    //         //check if word head is in children
-    //         var check = false;
-    //         var keys =
-    //         if(check){
-    //             nav.children[src[0]] = new PTNode(src[0]);
-    //             if(src.length == 0) nav.children[src[0]].final = 1;
-    //         }
-    //         nav = nav.children[src[0]];
-    //         src = src.slice(1);
-    //     }while(nav.final != 1);
-    // }
-
     insert(word){
         var insert_helper = function(nav, word){
             var keys = Object.keys(nav.children);
@@ -80,8 +60,12 @@ class PrefixTree{
         print_helper(this.head, "");
     }
 
-    word_search(term){
+    word_search(term, limit){
         var print_helper = function(nav, word){
+            if(limit == results.length){
+                return;
+            }
+
             if(nav.final){
                 // console.log(word+nav.value);
                 results = results.concat(word+nav.value);
@@ -110,7 +94,7 @@ class PrefixTree{
             if(!nav.hasChild(src[0])) return "empty";
             print_helper(nav.children[src[0]], term.slice(0,term.length-1), results);
         }
-        
+
         return results;
     }
 
@@ -118,11 +102,12 @@ class PrefixTree{
 
 const main = function(){
     var pt = new PrefixTree();
-    var words = ["harry", "potter", "pooper", "hairy", "harriet"];
+    var words = ["ara", "arajoy", "arabelles"];
+    console.log(words.length);
     for(var word of words){
         pt.insert(word);
     }
-    console.log(pt.word_search(""));
+    console.log(pt.word_search("ara", 3));
 }
 
 main();

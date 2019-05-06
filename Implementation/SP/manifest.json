@@ -9,7 +9,8 @@
         "tabs",
         "webNavigation",
         "storage",
-        "declarativeContent"
+        "declarativeContent",
+        "unlimitedStorage"
     ],
     "background" : {
         "scripts" : [
