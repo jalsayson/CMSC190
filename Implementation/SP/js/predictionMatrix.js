@@ -1,15 +1,5 @@
-'use strict';
-
-const wordbag = require('./wordBag');
-const sequence = require('./sequence');
-const npp = require('./nameProbabilityPair');
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var PredictionMatrix = (function(){
-    function PredictionMatrix(bag, sequence) {
+class PredictionMatrix {
+    constructor(bag, sequence) {
         this.matrix = {};
         this.reference = {
             'bag' : bag,
@@ -36,7 +26,7 @@ var PredictionMatrix = (function(){
         }
     }
 
-    PredictionMatrix.prototype.printMatrix = function() {
+    printMatrix() {
         for(var key of this.reference['keys']) {
             for(var key2 of this.reference['keys']) {
                 console.log(this.matrix[key][key2]);
@@ -44,7 +34,8 @@ var PredictionMatrix = (function(){
         }
     }
 
-    PredictionMatrix.prototype.getTopRanks = function(word, ranks = 3) {
+
+    getTopRanks(word, ranks = 3) {
         var ranking = [];
 
         var nppCompare = function(a, b) {
@@ -65,7 +56,7 @@ var PredictionMatrix = (function(){
         return ranking;
     }
 
-    PredictionMatrix.prototype.bayesComputation = function(word, key) {
+    bayesComputation(word, key) {
         var aGivenB = function(pmat, a, b) {
             return pmat.matrix[a][b];
         }
@@ -82,16 +73,8 @@ var PredictionMatrix = (function(){
         }
     }
 
-    PredictionMatrix.prototype.merge = function(pm2) {
+    merge(pm2) {
         this.reference['bag'].merge(pm2.reference['bag']);
         this.reference['sequence'] = sequence.mergeSequences(this.reference['sequence'], pm2.reference['sequence']);
     }
-
-    return PredictionMatrix;
-}());
-
-exports.default = {
-    PredictionMatrix : PredictionMatrix
-};
-
-module.exports = exports['default'];
+}

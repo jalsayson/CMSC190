@@ -1,15 +1,3 @@
-/*
-DEVELOPMENT LINEUP:
-    - regex fix
-    - connecting code to frontend
-    - data saving to chrome storage
-    - option/settings page
-    - dynamic option count (determine max option)
-*/
-
-var start = 0;
-var end = 0;
-
 /*****************************************************************
                                CLASSES
 *****************************************************************/
@@ -48,7 +36,6 @@ class PredictionMatrix {
 
         this.getTopRanks = function(word, ranks = 3) {
             var ranking = [];
-            var result = [];
 
             var nppCompare = function(a, b) {
                 if(a.value > b.value) return -1;
@@ -59,18 +46,13 @@ class PredictionMatrix {
             var keys = this.reference['keys'];
             for(var key of keys) {
                 var convertedPair = this.bayesComputation(word, key);
-                ranking = ranking.concat(new NameProbabilityPair(key, convertedPair));
+                ranking = ranking.concat(new npp.NameProbabilityPair(key, convertedPair));
                 ranking.sort(nppCompare);
                 if(ranking.length > ranks) {
                     ranking = ranking.slice(0, ranks);
                 }
             }
-
-            for(var i = 0; i < ranking.length; i++) {
-                result.push(ranking[i].name);
-            }
-
-            return result;
+            return ranking;
         }
 
         this.bayesComputation = function(word, key) {
@@ -121,7 +103,6 @@ class PredictionMatrix {
                 }
             }
         }
-
         else {
             this.matrix = matrixObject.matrix;
             this.reference = matrixObject.reference;
@@ -275,6 +256,16 @@ class PrefixTree {
                 else {
                     insertHelper(tree, tree.getNodeChild(nav, word[0]), popWord);
                 }
+                // if(!tree.nodeHasChild(nav, word[0])){
+                //     tree.newNodeChild(nav, word[0]);
+                // }
+                // var popWord = word.slice(1);
+                // if(popWord.length == 0) {
+                //     tree.finalizeNodeChild(nav, word[0]);
+                // }
+                // else{
+                //     insertHelper(tree.getNodeChild(nav, word[0]), popWord);
+                // }
             }
             console.log(wordInput)
             insertHelper(this, this.head, wordInput);
@@ -285,6 +276,7 @@ class PrefixTree {
             var src = word;
             var results = [];
             var searchHelper = function(tree, nav, word){
+                console.log(word+':'+nav.value);
                 if (maxLength == results.length){
                     return;
                 }
@@ -347,190 +339,55 @@ const cleanText = function(input) {
                             PAGE FUNCTIONS
 *****************************************************************/
 
-/*
-const initial_processing = function(){
+var pr={};
+
+const initializeApplication = function() {
     var entry = document.getElementById("text-space").value;
-    var punc_free = clean_text(entry)
-    var split_bag = create_bag(punc_free)
-    var text_chain = convert_to_chain(punc_free)
-    var probabilities = gen_prob_matrix(split_bag, text_chain)
-    print_prob_matrix(probabilities)
-}
-*/
 
-/*
-const text_check = function(){
-    var entry = document.getElementById("text-space").value;
-    var token = entry.split(" ");
-    console.log(clean_text(token[token.length-1]));
-}
-*/
+    if(entry == "") {
+        alert("No input found!")
+        return
+    }
 
-const createButton = function(option) {
-    var div = document.createElement("div");
-    div.className = "three column";
-    div.innerHTML = option;
-    return div;
-}
+    var entrySeq = createSequence(cleanText(entry));
+    var enTrie = new PrefixTree();
 
-const getStart = function(string, end) {
-    var start = end;
-    do {
-        //move cursor further back for spaces
-        if(string[start] == " ") {
-            start--;
-            continue;
+    for(var word of entrySeq) {
+        if(word != "\n") {
+            enTrie.insert(word);
         }
-        else {
-            //add string to gathered inputs
-            start--;
-            //if entry is a space or past the first character
-            if(string[start] == " " || string[start] === undefined) break;
-            if(start < 0) break;
+    }
+
+    var entryBag = new WordBag(entrySeq);
+    // console.log(entryBag);
+    var entryMat = new PredictionMatrix(entryBag, entrySeq);
+    // console.log(entryMat);
+
+    chrome.storage.local.set(
+        {
+            matrix : entryMat,
+            prefixTree : enTrie,
+            keywords : 6,
+            initialized : true
         }
-    } while(true);
+    );
 
-    return start;
+    // chrome.storage.local.get(['matrix', 'prefixTree'], function(result) {
+    //     // var m = new PredictionMatrix(null, null, result.matrix)
+    //     // m.reference['bag'] = new WordBag(m.reference['sequence']);
+    //     var p = new PrefixTree(result.prefixTree);
+    //     console.log(p);
+    //     pr = p;
+    // })
+
+    alert("Thank you! The interface will now be loaded.")
+
+    window.location.href = "../html/popup.html"
 }
 
-const displayResults = function(results) {
-    var container = document.getElementById("choices");
-    while(container.firstChild) {
-        container.removeChild(container.firstChild);
-    }
-
-    for(var i = 0; i < results.length; i++) {
-        container.append(createButton(results[i]));
-    }
-}
-
-const testCheck = function() {
-    var entry = document.getElementById("text-space");
-    // var pos = entry.selectionStart-1;
-    end = entry.selectionStart;
-    // var current = "";
-    //
-    // if(entry.value.length > 0 && start != 0){
-    //     start = end;
-    //     do {
-    //         start--;
-    //     }
-    //     while(entry.value[start] != " " || start != 0)
-    // }
-
-    if(entry.value.length != 0 && end != 0) {
-        start = getStart(entry.value, end);
-    }
-
-    var current = entry.value.substring(start, end).trim();
-
-    if(current == "") {
-        var ministart = getStart(entry.value, end-1);
-        current = entry.value.substring(ministart, end).trim();
-        console.log("matrix")
-        chrome.storage.local.get(['matrix', 'keywords'], function(result) {
-            var matrix = new PredictionMatrix(null, null, result.matrix);
-            matrix.reference['bag'] = new WordBag(matrix.reference['sequence']);
-
-            var results = matrix.getTopRanks(current, result.keywords)
-
-            // console.log(results)
-
-            displayResults(results)
-        })
-    }
-
-    else {
-        console.log("prefix tree")
-        chrome.storage.local.get(['prefixTree', 'keywords'], function(result) {
-            var tree = new PrefixTree(result.prefixTree);
-
-            // console.log(tree);
-
-            var results = new PrefixTree(result.prefixTree).search(current, result.keywords);
-
-            // console.log(results);
-
-            displayResults(results);
-        })
-    }
-}
-
-/*
-const test_matrix = function(){
-    var string = document.getElementById('text-space').value;
-    var seq = createSequence(string);
-    var bag = new WordBag(seq);
-    // console.log(seq);
-    var pdm = new PredictionMatrix(bag, seq);
-    // pdm.printMatrix();
-    var rankers = pdm.getTopRanks("i", 10);
-    // var insert = [];
-    var cont = document.getElementById('choices');
-    while (cont.firstChild) {
-        cont.removeChild(cont.firstChild);
-    }
-    for(var i = 0; i < 10; i++){
-        cont.appendChild(create_button(rankers[i].name));
-    }
-}
-*/
-
-/*
-const matrix_update = function(){
-    var entry = document.getElementById("text-space").value;
-    var seq = createSequence(string);
-    var bag = new WordBag(seq);
-
-    chrome.storage.local.get(['matrix'], function(result){
-        if(result.matrix === undefined){
-            var pdm = new PredictionMatrix(bag, seq);
-        }
-        else{
-            pdm.updateMatrix(bag, seq);
-        }
-    })
-}
-*/
-
-const move = function(link) {
-    chrome.tabs.create({url: link}, function (tab) {});
-}
-
-const on_run = function() {
-    chrome.storage.local.get(['matrix'], function(result){
-        if(result.matrix === undefined) {
-            var wrap = document.getElementById("popup-wrap");
-            console.log(wrap);
-            wrap.style.display = "none";
-            var div = document.createElement("div");
-            div.innerHTML = "Initialize your predictor!";
-
-            var link = document.createElement("a");
-            link.innerHTML = "Go here!";
-            link.style.color = "blue";
-            link.style.textDecoration = "underline";
-            link.style.cursor = "pointer";
-            link.href = "../html/installed.html";
-
-            // link.addEventListener('click', move.bind(this, "../html/installed.html"));
-
-            div.appendChild(document.createElement("br"));
-            div.appendChild(link);
-            document.body.appendChild(div);
-        }
-    });
-
-    var src = document.getElementById("copy-button");
-    // src.addEventListener("click", matrix_update);
-    // src.addEventListener("click", text_processing);
-
-    var src2 = document.getElementById("text-space");
-    src2.addEventListener ("keyup", testCheck);
-    src2.addEventListener ("click", testCheck);
-
-    var src3 = document.getElementById("begin-button");
-    // src3.addEventListener("click", test_matrix);
+const on_run = function(){
+    var src = document.getElementById("submit");
+    submit.addEventListener('click', initializeApplication.bind(this));
 }
 
 on_run();

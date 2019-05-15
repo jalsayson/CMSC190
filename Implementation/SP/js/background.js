@@ -1,12 +1,14 @@
 let on_install = function(){
-    //remove previous saved data, if any
-    chrome.storage.local.clear
-
-    //put new data
-    chrome.storage.local.set({keywords : 3});
-    chrome.storage.local.set({})
+    // //remove previous saved data, if any
+    // chrome.storage.local.clear
+    //
+    // //put new data
+    // chrome.storage.local.set({keywords : 3});
+    // chrome.storage.local.set({})
 
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function(){
+        // chrome.tabs.create({url: "../html/installed.html"}, function (tab) {});
+
         //enable extension if it detects a textbox in the website
         chrome.declarativeContent.onPageChanged.addRules([{
             conditions : [

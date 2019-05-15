@@ -1,11 +1,5 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var WordBag = (function(){
-    function WordBag(sequence) {
+class WordBag {
+    constructor(sequence) {
         this.bag = {};
         if(sequence !== undefined){
             for(var i = 0; i < sequence.length; i++) {
@@ -14,41 +8,41 @@ var WordBag = (function(){
         }
     }
 
-    WordBag.prototype.increment = function(name) {
+    increment(name) {
         if(!this.hasKey(name)) this.insert(name, 0);
         this.bag[name]++;
     }
 
-    WordBag.prototype.insert = function(name, count) {
+    insert(name, count) {
         this.bag[name] = count;
     }
 
-    WordBag.prototype.hasKey = function(value){
+    hasKey(value){
         for(var key of this.keys()) {
             if(value == key) return true;
         }
         return false;
     }
 
-    WordBag.prototype.getCount = function(name) {
+    getCount(name) {
         return this.bag[name];
     }
 
-    WordBag.prototype.getBag = function() {
+    getBag() {
         return this.bag;
     }
 
-    WordBag.prototype.keys = function() {
+    keys() {
         return Object.keys(this.bag);
     }
 
-    WordBag.prototype.printBag = function() {
+    printBag() {
         for(var key of this.keys()) {
             console.log(key + " : " + this.bag[key]);
         }
     }
 
-    WordBag.prototype.merge = function(bag) {
+    merge(bag) {
         for(var key of bag.keys()) {
             if(this.hasKey(key)) {
                 this.bag[key] = this.bag[key] + bag.bag[key];
@@ -58,12 +52,4 @@ var WordBag = (function(){
             }
         }
     }
-
-    return WordBag;
-}());
-
-exports.default = {
-    WordBag : WordBag
 };
-
-module.exports = exports['default'];

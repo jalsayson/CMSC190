@@ -1,0 +1,61 @@
+* {
+    font-family: 'Lato';
+    font-weight: lighter;
+}
+
+.header {
+    font-family: 'PT Serif', serif;
+    font-weight: bolder;
+}
+
+#page {
+    width: 500px;
+    height: 180px;
+    text-align: center;
+}
+
+#page > div {
+    background-color: #3f3f3f;
+    color: white;
+    padding: 15px;
+    /* border: 1px solid red; */
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+form {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 15px;
+}
+
+#submit {
+    background-color: green;
+    color: white;
+    display: inline;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: white;
+    color: green;
+    border: 2px solid green;
+}
+
+#text-space {
+    width: 99%;
+    border-radius: 10px;
+    resize: none;
+}
+
+.header {
+    font-size: 30px;
+}
+
+textarea {
+    margin-bottom: 10px;
+}

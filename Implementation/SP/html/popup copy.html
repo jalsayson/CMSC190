@@ -3,7 +3,7 @@
     <head>
         <title>Prediction Keyboard</title>
         <link rel="stylesheet"  type="text/css" href="../css/popup.css"></link>
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     </head>
     <body>
         <div class="wrapper" id="popup-wrap">
@@ -13,24 +13,15 @@
             <div class="input-area">
                 <form>
                     <textarea rows="6" id="text-space" placeholder="Enter your sentences here..."></textarea>
+                    <div class="greenhover button" id="copy-button">
+                        Copy to Clipboard
+                    </div>
                 </form>
             </div>
             <div class="table" id="predictor">
                 <div class="row" id="choices">
-                    <span class="placeholder">Your words shall appear here.</span>
                 </div>
             </div>
-            <div class="table">
-                <div class="oprow">
-                    <div class="greenhover opcolumn" id="copy-button">
-                        Copy to Clipboard
-                    </div>
-                    <div class="opcolumn">
-                        Open Options
-                    </div>
-                </div
-            </div>
-        </div>
         <script src="../js/popup.js"></script>
     </body>
 </html>
