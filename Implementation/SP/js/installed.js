@@ -369,8 +369,12 @@ const initializeApplication = function() {
     var entrySeq = createSequence(cleanText(entry));
     var enTrie = new PrefixTree();
 
+    // chrome.tabs.executeScript(
+    //     {file: "loadDict.js"}
+    // );
+
     for(var word of entrySeq) {
-        if(word != "\n") {          //consider regexing acceptable text
+        if(word != "\n") {
             enTrie.insert(word);
         }
     }
@@ -386,14 +390,6 @@ const initializeApplication = function() {
             initialized : true
         }
     );
-
-    // chrome.storage.local.get(['matrix', 'prefixTree'], function(result) {
-    //     // var m = new PredictionMatrix(null, null, result.matrix)
-    //     // m.reference['bag'] = new WordBag(m.reference['sequence']);
-    //     var p = new PrefixTree(result.prefixTree);
-    //     console.log(p);
-    //     pr = p;
-    // })
 
     alert("Thank you! The interface will now be loaded.")
 

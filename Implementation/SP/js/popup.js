@@ -364,9 +364,7 @@ const cleanText = function(input) {
     var result = input.toLowerCase();
 
     var puncRegex = /[\.\,!@#\$\%\^&\*\(\)/\\\?;:'"\[\]\{\}\|\-_=+`~]/g;
-
     result = result.replace(puncRegex, " ");
-
     console.log(result);
 
     return result;
@@ -376,10 +374,26 @@ const cleanText = function(input) {
                             PAGE FUNCTIONS
 *****************************************************************/
 
-const addInput = function(word) {
+const addInput = function(word, current, type) {
     var textarea = document.getElementById("text-space");
-    textarea.value = textarea.value.substring(0, end) + word + " " + textarea.value.substring(end, textarea.value.length);
+
+    var beginning = textarea.value.substring(0, end);
+
+    var middle = '';
+    if(type == 'prefix') {
+        middle =  word.substring(current.length, word.length);
+    }
+
+    else {
+        middle = word;
+    }
+
+    var ending = " " + textarea.value.substring(end, textarea.value.length);
+
     end += word.length + 1;
+
+    textarea.value = beginning + middle + ending;
+
     getMatrixResults(word);
 }
 
@@ -392,7 +406,7 @@ const getMatrixResults = function(current) {
 
         // console.log(results)
 
-        displayResults(results)
+        displayResults(current, results, 'matrix');
     })
 }
 
@@ -404,17 +418,15 @@ const getPrefixTreeResults = function(current) {
 
         var results = new PrefixTree(result.prefixTree).search(current, result.keywords*2);
 
-        // console.log(results);
-
-        displayResults(results);
+        displayResults(current, results, 'prefix');
     })
 }
 
-const createButton = function(option) {
+const createButton = function(current, option, type) {
     var div = document.createElement("div");
     div.className = "three column";
     div.innerHTML = option;
-    div.addEventListener('click', addInput.bind(this, option));
+    div.addEventListener('click', addInput.bind(this, option, current, type));
     return div;
 }
 
@@ -438,7 +450,7 @@ const getStart = function(string, end) {
     return start;
 }
 
-const displayResults = function(results) {
+const displayResults = function(current, results, type) {
     var container = document.getElementById("choices");
     while(container.firstChild) {
         container.removeChild(container.firstChild);
@@ -451,7 +463,7 @@ const displayResults = function(results) {
             if(results[i] == "\n") {
                 continue;
             }
-            container.append(createButton(results[i]));
+            container.append(createButton(current, results[i], type));
         }
     }
     else {
@@ -470,7 +482,7 @@ const testCheck = function() {
         start = getStart(entry.value, end);
     }
 
-    var current = entry.value.substring(start, end).trim();
+    var current = entry.value.substring(start, end).trim().toLowerCase();
 
     if(current == "") {
         var ministart = getStart(entry.value, end-1);

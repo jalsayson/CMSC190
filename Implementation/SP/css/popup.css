@@ -61,13 +61,13 @@ form {
 }
 
 .greenhover:hover {
-    background-color: #888888;
-    color: green !important;
+    background-color: #2ca553 !important;
+    color: white !important;
 }
 
 .redhover:hover {
-    background-color: #888888;
-    color: red !important;
+    background-color: #ce3737 !important;
+    color: white !important;
 }
 
 input[type='submit']{
