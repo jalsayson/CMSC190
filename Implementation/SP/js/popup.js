@@ -1,10 +1,7 @@
 /*
 DEVELOPMENT LINEUP:
     - regex fix
-    - connecting code to frontend
-    - data saving to chrome storage
     - option/settings page
-    - dynamic option count (determine max option)
 */
 
 var start = 0;
@@ -342,6 +339,10 @@ class PrefixTree {
     }
 }
 
+/*****************************************************************
+                        IMPORTANT FUNCTIONS
+*****************************************************************/
+
 const createSequence = function(source) {
     var sequence = ['\n'];
     var lines = source.split("\n");
@@ -360,7 +361,14 @@ const mergeSequences = function(destination, source) {
 }
 
 const cleanText = function(input) {
-    var result = input;
+    var result = input.toLowerCase();
+
+    var puncRegex = /[\.\,!@#\$\%\^&\*\(\)/\\\?;:'"\[\]\{\}\|\-_=+`~]/g;
+
+    result = result.replace(puncRegex, " ");
+
+    console.log(result);
+
     return result;
 }
 
@@ -468,7 +476,12 @@ const testCheck = function() {
         var ministart = getStart(entry.value, end-1);
         current = entry.value.substring(ministart, end).trim();
         console.log("matrix")
-        getMatrixResults(current);
+        if(current == ""){
+            getMatrixResults("\n");
+        }
+        else {
+            getMatrixResults(current);
+        }
     }
 
     else {
@@ -527,6 +540,7 @@ const clearText = function() {
     text.value = "";
     start = 0;
     end = 0;
+    getMatrixResults("\n");
 }
 
 const on_run = function() {
@@ -561,6 +575,8 @@ const on_run = function() {
     var src2 = document.getElementById("text-space");
     src2.addEventListener ("keyup", testCheck);
     src2.addEventListener ("click", testCheck);
+
+    getMatrixResults("\n");
 }
 
 on_run();

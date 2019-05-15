@@ -36,6 +36,7 @@ class PredictionMatrix {
 
         this.getTopRanks = function(word, ranks = 3) {
             var ranking = [];
+            var result = [];
 
             var nppCompare = function(a, b) {
                 if(a.value > b.value) return -1;
@@ -46,13 +47,18 @@ class PredictionMatrix {
             var keys = this.reference['keys'];
             for(var key of keys) {
                 var convertedPair = this.bayesComputation(word, key);
-                ranking = ranking.concat(new npp.NameProbabilityPair(key, convertedPair));
+                ranking = ranking.concat(new NameProbabilityPair(key, convertedPair));
                 ranking.sort(nppCompare);
                 if(ranking.length > ranks) {
                     ranking = ranking.slice(0, ranks);
                 }
             }
-            return ranking;
+
+            for(var i = 0; i < ranking.length; i++) {
+                result.push(ranking[i].name);
+            }
+
+            return result;
         }
 
         this.bayesComputation = function(word, key) {
@@ -74,7 +80,28 @@ class PredictionMatrix {
 
         this.merge = function(pm2) {
             this.reference['bag'].merge(pm2.reference['bag']);
+            this.reference['keys'] = this.reference['bag'].keys();
             this.reference['sequence'] = mergeSequences(this.reference['sequence'], pm2.reference['sequence']);
+
+            var sequence = this.reference['sequence'];
+
+            var keys = this.reference['keys'];
+            for(var key of keys) {
+                this.matrix[key] = {};
+                for(var key2 of keys) {
+                    this.matrix[key][key2] = 0;
+                }
+            }
+
+            for(var i = 1; i < sequence.length; i++) {
+                this.matrix[sequence[i]][sequence[i-1]]++;
+            }
+
+            for(var key of keys) {
+                for(var key2 of keys) {
+                    this.matrix[key][key2] = this.matrix[key][key2]/this.reference['bag'].getBag()[key];
+                }
+            }
         }
 
         if(matrixObject === undefined) {
@@ -103,6 +130,7 @@ class PredictionMatrix {
                 }
             }
         }
+
         else {
             this.matrix = matrixObject.matrix;
             this.reference = matrixObject.reference;
@@ -256,16 +284,6 @@ class PrefixTree {
                 else {
                     insertHelper(tree, tree.getNodeChild(nav, word[0]), popWord);
                 }
-                // if(!tree.nodeHasChild(nav, word[0])){
-                //     tree.newNodeChild(nav, word[0]);
-                // }
-                // var popWord = word.slice(1);
-                // if(popWord.length == 0) {
-                //     tree.finalizeNodeChild(nav, word[0]);
-                // }
-                // else{
-                //     insertHelper(tree.getNodeChild(nav, word[0]), popWord);
-                // }
             }
             console.log(wordInput)
             insertHelper(this, this.head, wordInput);
@@ -276,7 +294,6 @@ class PrefixTree {
             var src = word;
             var results = [];
             var searchHelper = function(tree, nav, word){
-                console.log(word+':'+nav.value);
                 if (maxLength == results.length){
                     return;
                 }
