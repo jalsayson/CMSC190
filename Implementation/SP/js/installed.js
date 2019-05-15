@@ -192,8 +192,10 @@ class WordBag {
         this.bag = {};
         if(sequence !== undefined){
             for(var i = 0; i < sequence.length; i++) {
+                console.log(sequence[i]);
                 this.increment(sequence[i]);
             }
+            this.printBag();
         }
 
     }
@@ -330,12 +332,18 @@ class PrefixTree {
     }
 }
 
+/*****************************************************************
+                        IMPORTANT FUNCTIONS
+*****************************************************************/
+
 const createSequence = function(source) {
     var sequence = ['\n'];
     var lines = source.split("\n");
     for(var i = 0; i < lines.length; i++) {
         var text = lines[i].split(" ");
-        for (var j = 0; j < text.length; j++){
+        var len = text.length;
+        console.log(text);
+        for (var j = 0; j < len; j++){
             sequence = sequence.concat([text[j]]);
         }
     }
@@ -348,8 +356,16 @@ const mergeSequences = function(destination, source) {
 }
 
 const cleanText = function(input) {
-    var result = input;
-    return result;
+    var result = input.toLowerCase();
+
+    var puncRegex = /[.\,!@#\$\%\^&\*\(\)/\\\?;:'"\[\]\{\}\|\-_=+`~]/g;
+    result = result.replace(puncRegex, " ");
+
+    var extraSpaceRegex = /[ ]+/g;
+    result = result.replace(extraSpaceRegex, " ");
+    console.log(result);
+
+    return result.trim();
 }
 
 /*****************************************************************
@@ -367,14 +383,11 @@ const initializeApplication = function() {
     }
 
     var entrySeq = createSequence(cleanText(entry));
+    console.log(entrySeq)
     var enTrie = new PrefixTree();
 
-    // chrome.tabs.executeScript(
-    //     {file: "loadDict.js"}
-    // );
-
     for(var word of entrySeq) {
-        if(word != "\n") {
+        if(word != "\n" && word != " " && word != "") {
             enTrie.insert(word);
         }
     }

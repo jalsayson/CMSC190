@@ -24,7 +24,7 @@ form {
     resize: none;
 }
 
-#title {
+#title, #settings-footer {
     width: 100%;
     text-align: center;
     margin-top: 1rem;
@@ -112,6 +112,7 @@ input[type='submit']{
     padding-top: 4%;
     padding-bottom: 4%;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .unselectable {
@@ -153,4 +154,10 @@ input[type='submit']{
 
 .placeholder {
     color: #8f8f8f;
+}
+
+#settings-footer {
+    /* text-decoration: underline; */
+    color: #77abff;
+    cursor: pointer;
 }

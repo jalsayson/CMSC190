@@ -12,9 +12,6 @@
         "declarativeContent",
         "unlimitedStorage"
     ],
-    "web_accessible_resources" : [
-        "files/words_alpha.txt"
-    ]
     "background" : {
         "scripts" : [
             "js/background.js"

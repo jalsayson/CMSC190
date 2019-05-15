@@ -1,12 +1,11 @@
 /*
 DEVELOPMENT LINEUP:
-    - regex fix
     - option/settings page
 */
 
 var start = 0;
 var end = 0;
-
+var prev = null;
 /*****************************************************************
                                CLASSES
 *****************************************************************/
@@ -201,8 +200,10 @@ class WordBag {
         this.bag = {};
         if(sequence !== undefined){
             for(var i = 0; i < sequence.length; i++) {
+                console.log(sequence[i]);
                 this.increment(sequence[i]);
             }
+            this.printBag();
         }
 
     }
@@ -348,7 +349,9 @@ const createSequence = function(source) {
     var lines = source.split("\n");
     for(var i = 0; i < lines.length; i++) {
         var text = lines[i].split(" ");
-        for (var j = 0; j < text.length; j++){
+        var len = text.length;
+        console.log(text);
+        for (var j = 0; j < len; j++){
             sequence = sequence.concat([text[j]]);
         }
     }
@@ -363,11 +366,14 @@ const mergeSequences = function(destination, source) {
 const cleanText = function(input) {
     var result = input.toLowerCase();
 
-    var puncRegex = /[\.\,!@#\$\%\^&\*\(\)/\\\?;:'"\[\]\{\}\|\-_=+`~]/g;
+    var puncRegex = /[.\,!@#\$\%\^&\*\(\)/\\\?;:'"\[\]\{\}\|\-_=+`~]/g;
     result = result.replace(puncRegex, " ");
+
+    var extraSpaceRegex = /[ ]+/g;
+    result = result.replace(extraSpaceRegex, " ");
     console.log(result);
 
-    return result;
+    return result.trim();
 }
 
 /*****************************************************************
@@ -377,6 +383,7 @@ const cleanText = function(input) {
 const addInput = function(word, current, type) {
     var textarea = document.getElementById("text-space");
 
+    console.log(word)
     var beginning = textarea.value.substring(0, end);
 
     var middle = '';
@@ -460,7 +467,7 @@ const displayResults = function(current, results, type) {
 
     if(typeof results == "object"){
         for(var i = 0; i < results.length/2; i++) {
-            if(results[i] == "\n") {
+            if(results[i] == "\n" || results[i] == "") {
                 continue;
             }
             container.append(createButton(current, results[i], type));
@@ -488,7 +495,7 @@ const testCheck = function() {
         var ministart = getStart(entry.value, end-1);
         current = entry.value.substring(ministart, end).trim();
         console.log("matrix")
-        if(current == ""){
+        if(current == "") {
             getMatrixResults("\n");
         }
         else {
@@ -555,6 +562,10 @@ const clearText = function() {
     getMatrixResults("\n");
 }
 
+const openSettings = function() {
+    window.location.href = "../html/settings.html";
+}
+
 const on_run = function() {
     chrome.storage.local.get(['matrix'], function(result){
         if(result.matrix === undefined) {
@@ -562,7 +573,9 @@ const on_run = function() {
             console.log(wrap);
             wrap.style.display = "none";
             var div = document.createElement("div");
-            div.style.margin = "8px;"
+            div.style.width = "300px;"
+            div.style.height = "400px;"
+            div.style.padding = "8px;"
             div.innerHTML = "Initialize your predictor!";
 
             var link = document.createElement("a");
@@ -587,6 +600,9 @@ const on_run = function() {
     var src2 = document.getElementById("text-space");
     src2.addEventListener ("keyup", testCheck);
     src2.addEventListener ("click", testCheck);
+
+    var src3 = document.getElementById("settings-button");
+    src3.addEventListener("click", openSettings);
 
     getMatrixResults("\n");
 }

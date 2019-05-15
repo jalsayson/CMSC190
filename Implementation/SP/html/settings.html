@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Prediction Keyboard Settings</title>
+        <link rel="stylesheet"  type="text/css" href="../css/popup.css"></link>
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    </head>
+    <body>
+        <div class="wrapper" id="popup-wrap">
+            <div id="title" class="unselectable">
+                SETTINGS
+            </div>
+            <div class="unselectable table">
+                <div class="oprow">
+                    <div class="opcolumn" id="settings-button">
+                        Keyword Count: <span id="count"></span><br>
+                        <input type="range" id="keyrange" min="3" max="12"/>
+                    </div>
+                </div>
+            </div>
+            <div class="unselectable table">
+                <div class="oprow">
+                    <div class="redhover opcolumn" id="reset-button">
+                        Reset Predictor
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings-footer" class="unselectable">
+                RETURN
+            </div>
+        </div>
+        <script src="../js/settings.js"></script>
+    </body>
+</html>
