@@ -345,23 +345,21 @@ const initializeApplication = function() {
     var entry = document.getElementById("text-space").value;
 
     if(entry == "") {
-        alert("No input found!")
-        return
+        alert("No input found!");
+        return;
     }
 
     var entrySeq = createSequence(cleanText(entry));
     var enTrie = new PrefixTree();
 
     for(var word of entrySeq) {
-        if(word != "\n") {
+        if(word != "\n") {          //consider regexing acceptable text
             enTrie.insert(word);
         }
     }
 
     var entryBag = new WordBag(entrySeq);
-    // console.log(entryBag);
     var entryMat = new PredictionMatrix(entryBag, entrySeq);
-    // console.log(entryMat);
 
     chrome.storage.local.set(
         {

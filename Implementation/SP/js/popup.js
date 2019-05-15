@@ -92,7 +92,28 @@ class PredictionMatrix {
 
         this.merge = function(pm2) {
             this.reference['bag'].merge(pm2.reference['bag']);
+            this.reference['keys'] = this.reference['bag'].keys();
             this.reference['sequence'] = mergeSequences(this.reference['sequence'], pm2.reference['sequence']);
+
+            var sequence = this.reference['sequence'];
+
+            var keys = this.reference['keys'];
+            for(var key of keys) {
+                this.matrix[key] = {};
+                for(var key2 of keys) {
+                    this.matrix[key][key2] = 0;
+                }
+            }
+
+            for(var i = 1; i < sequence.length; i++) {
+                this.matrix[sequence[i]][sequence[i-1]]++;
+            }
+
+            for(var key of keys) {
+                for(var key2 of keys) {
+                    this.matrix[key][key2] = this.matrix[key][key2]/this.reference['bag'].getBag()[key];
+                }
+            }
         }
 
         if(matrixObject === undefined) {
@@ -347,29 +368,45 @@ const cleanText = function(input) {
                             PAGE FUNCTIONS
 *****************************************************************/
 
-/*
-const initial_processing = function(){
-    var entry = document.getElementById("text-space").value;
-    var punc_free = clean_text(entry)
-    var split_bag = create_bag(punc_free)
-    var text_chain = convert_to_chain(punc_free)
-    var probabilities = gen_prob_matrix(split_bag, text_chain)
-    print_prob_matrix(probabilities)
+const addInput = function(word) {
+    var textarea = document.getElementById("text-space");
+    textarea.value = textarea.value.substring(0, end) + word + " " + textarea.value.substring(end, textarea.value.length);
+    end += word.length + 1;
+    getMatrixResults(word);
 }
-*/
 
-/*
-const text_check = function(){
-    var entry = document.getElementById("text-space").value;
-    var token = entry.split(" ");
-    console.log(clean_text(token[token.length-1]));
+const getMatrixResults = function(current) {
+    chrome.storage.local.get(['matrix', 'keywords'], function(result) {
+        var matrix = new PredictionMatrix(null, null, result.matrix);
+        matrix.reference['bag'] = new WordBag(matrix.reference['sequence']);
+
+        var results = matrix.getTopRanks(current, result.keywords*2)
+
+        // console.log(results)
+
+        displayResults(results)
+    })
 }
-*/
+
+const getPrefixTreeResults = function(current) {
+    chrome.storage.local.get(['prefixTree', 'keywords'], function(result) {
+        var tree = new PrefixTree(result.prefixTree);
+
+        // console.log(tree);
+
+        var results = new PrefixTree(result.prefixTree).search(current, result.keywords*2);
+
+        // console.log(results);
+
+        displayResults(results);
+    })
+}
 
 const createButton = function(option) {
     var div = document.createElement("div");
     div.className = "three column";
     div.innerHTML = option;
+    div.addEventListener('click', addInput.bind(this, option));
     return div;
 }
 
@@ -399,24 +436,27 @@ const displayResults = function(results) {
         container.removeChild(container.firstChild);
     }
 
-    for(var i = 0; i < results.length; i++) {
-        container.append(createButton(results[i]));
+    console.log(typeof results);
+
+    if(typeof results == "object"){
+        for(var i = 0; i < results.length/2; i++) {
+            if(results[i] == "\n") {
+                continue;
+            }
+            container.append(createButton(results[i]));
+        }
+    }
+    else {
+        var span = document.createElement("span");
+        span.className = "placeholder";
+        span.innerHTML = "No results."
+        container.append(span);
     }
 }
 
 const testCheck = function() {
     var entry = document.getElementById("text-space");
-    // var pos = entry.selectionStart-1;
     end = entry.selectionStart;
-    // var current = "";
-    //
-    // if(entry.value.length > 0 && start != 0){
-    //     start = end;
-    //     do {
-    //         start--;
-    //     }
-    //     while(entry.value[start] != " " || start != 0)
-    // }
 
     if(entry.value.length != 0 && end != 0) {
         start = getStart(entry.value, end);
@@ -428,73 +468,65 @@ const testCheck = function() {
         var ministart = getStart(entry.value, end-1);
         current = entry.value.substring(ministart, end).trim();
         console.log("matrix")
-        chrome.storage.local.get(['matrix', 'keywords'], function(result) {
-            var matrix = new PredictionMatrix(null, null, result.matrix);
-            matrix.reference['bag'] = new WordBag(matrix.reference['sequence']);
-
-            var results = matrix.getTopRanks(current, result.keywords)
-
-            // console.log(results)
-
-            displayResults(results)
-        })
+        getMatrixResults(current);
     }
 
     else {
         console.log("prefix tree")
-        chrome.storage.local.get(['prefixTree', 'keywords'], function(result) {
-            var tree = new PrefixTree(result.prefixTree);
-
-            // console.log(tree);
-
-            var results = new PrefixTree(result.prefixTree).search(current, result.keywords);
-
-            // console.log(results);
-
-            displayResults(results);
-        })
+        getPrefixTreeResults(current);
     }
 }
 
-/*
-const test_matrix = function(){
-    var string = document.getElementById('text-space').value;
-    var seq = createSequence(string);
-    var bag = new WordBag(seq);
-    // console.log(seq);
-    var pdm = new PredictionMatrix(bag, seq);
-    // pdm.printMatrix();
-    var rankers = pdm.getTopRanks("i", 10);
-    // var insert = [];
-    var cont = document.getElementById('choices');
-    while (cont.firstChild) {
-        cont.removeChild(cont.firstChild);
+const copyText = function() {
+    var text = document.getElementById("text-space");
+    var entry = text.value;
+    if(entry == "") {
+        alert("No input to copy!");
+        return;
     }
-    for(var i = 0; i < 10; i++){
-        cont.appendChild(create_button(rankers[i].name));
-    }
-}
-*/
 
-/*
-const matrix_update = function(){
-    var entry = document.getElementById("text-space").value;
-    var seq = createSequence(string);
-    var bag = new WordBag(seq);
+    var entrySeq = createSequence(cleanText(entry));
+    var entryBag = new WordBag(entrySeq);
+    var entryMat = new PredictionMatrix(entryBag, entrySeq);
 
-    chrome.storage.local.get(['matrix'], function(result){
-        if(result.matrix === undefined){
-            var pdm = new PredictionMatrix(bag, seq);
+    chrome.storage.local.get(['matrix'], function(result) {
+        var matrix = new PredictionMatrix(null, null, result.matrix);
+        matrix.reference['bag'] = new WordBag(matrix.reference['sequence']);
+
+        matrix.merge(entryMat);
+
+        chrome.storage.local.set(
+            {
+                matrix : matrix
+            }
+        );
+    });
+
+    chrome.storage.local.get(['prefixTree'], function(result) {
+        var tree = new PrefixTree(result.prefixTree);
+
+        for(var word of entrySeq) {
+            if(word != "\n") {          //consider regexing acceptable text
+                tree.insert(word);
+            }
         }
-        else{
-            pdm.updateMatrix(bag, seq);
-        }
-    })
-}
-*/
 
-const move = function(link) {
-    chrome.tabs.create({url: link}, function (tab) {});
+        chrome.storage.local.set(
+            {
+                prefixTree : tree
+            }
+        );
+    });
+
+    text.select();
+    document.execCommand("copy");
+}
+
+const clearText = function() {
+    var text = document.getElementById("text-space");
+    text.value = "";
+    start = 0;
+    end = 0;
 }
 
 const on_run = function() {
@@ -504,6 +536,7 @@ const on_run = function() {
             console.log(wrap);
             wrap.style.display = "none";
             var div = document.createElement("div");
+            div.style.margin = "8px;"
             div.innerHTML = "Initialize your predictor!";
 
             var link = document.createElement("a");
@@ -513,8 +546,6 @@ const on_run = function() {
             link.style.cursor = "pointer";
             link.href = "../html/installed.html";
 
-            // link.addEventListener('click', move.bind(this, "../html/installed.html"));
-
             div.appendChild(document.createElement("br"));
             div.appendChild(link);
             document.body.appendChild(div);
@@ -522,15 +553,14 @@ const on_run = function() {
     });
 
     var src = document.getElementById("copy-button");
-    // src.addEventListener("click", matrix_update);
-    // src.addEventListener("click", text_processing);
+    src.addEventListener("click", copyText);
+
+    var src = document.getElementById("clear-button");
+    src.addEventListener("click", clearText);
 
     var src2 = document.getElementById("text-space");
     src2.addEventListener ("keyup", testCheck);
     src2.addEventListener ("click", testCheck);
-
-    var src3 = document.getElementById("begin-button");
-    // src3.addEventListener("click", test_matrix);
 }
 
 on_run();

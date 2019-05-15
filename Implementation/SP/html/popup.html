@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class="wrapper" id="popup-wrap">
-            <div ID="title">
+            <div id="title" class="unselectable">
                 TEXT ENTRY
             </div>
             <div class="input-area">
@@ -16,14 +16,17 @@
                 </form>
             </div>
             <div class="table" id="predictor">
-                <div class="row" id="choices">
-                    <span class="placeholder">Your words shall appear here.</span>
+                <div class="row unselectable" id="choices">
+                    <span class="unselectable placeholder">Your words shall appear here.</span>
                 </div>
             </div>
-            <div class="table">
+            <div class="unselectable table">
                 <div class="oprow">
                     <div class="greenhover opcolumn" id="copy-button">
                         Copy to Clipboard
+                    </div>
+                    <div class="redhover opcolumn" id="clear-button">
+                        Clear
                     </div>
                     <div class="opcolumn">
                         Open Options
