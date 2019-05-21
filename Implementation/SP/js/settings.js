@@ -10,7 +10,6 @@ const updateDisplay = function() {
 }
 
 const confirmDelete = function() {
-    console.log("pop")
     var del = confirm("Are you sure you would like to reset the application?");
     if(del) {
         chrome.storage.local.remove('matrix');

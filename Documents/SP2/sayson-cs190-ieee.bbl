@@ -1,0 +1,63 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{#1}
+\csname url@rmstyle\endcsname
+\providecommand{\newblock}{\relax}
+\providecommand{\bibinfo}[2]{#2}
+\providecommand\BIBentrySTDinterwordspacing{\spaceskip=0pt\relax}
+\providecommand\BIBentryALTinterwordstretchfactor{4}
+\providecommand\BIBentryALTinterwordspacing{\spaceskip=\fontdimen2\font plus
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
+\providecommand\BIBforeignlanguage[2]{{%
+\expandafter\ifx\csname l@#1\endcsname\relax
+\typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
+\typeout{** loaded for the language `#1'. Using the pattern for}%
+\typeout{** the default language instead.}%
+\else
+\language=\csname l@#1\endcsname
+\fi
+#2}}
+
+\bibitem{AIWriter}
+``Aiwriter,'' \url{http://www.ai-writer.com/}, accessed: 2018-11-01.
+
+\bibitem{GV2006}
+\BIBentryALTinterwordspacing
+N.~"Garay-Vitoria and J.~Abascal, ``"text prediction systems: a survey",''
+  \emph{"Universal Access in the Information Society"}, vol. "4", no. "3", pp.
+  "188--203", "Mar" "2006". [Online]. Available:
+  \url{"https://doi.org/10.1007/s10209-005-0005-9"}
+\BIBentrySTDinterwordspacing
+
+\bibitem{UKIHSS2002}
+\BIBentryALTinterwordspacing
+K.~Uchimoto, H.~Isahara, and S.~Sekine, ``Text generation from keywords,'' in
+  \emph{Proceedings of the 19th International Conference on Computational
+  Linguistics - Volume 1}, ser. COLING '02.\hskip 1em plus 0.5em minus
+  0.4em\relax Stroudsburg, PA, USA: Association for Computational Linguistics,
+  2002, pp. 1--7. [Online]. Available:
+  \url{https://doi.org/10.3115/1072228.1072292}
+\BIBentrySTDinterwordspacing
+
+\bibitem{ZXLM2014}
+X.~Zhang and M.~Lapata, ``Chinese poetry generation with recurrent neural
+  networks,'' pp. 670--680, 01 2014.
+
+\bibitem{FLD2018}
+\BIBentryALTinterwordspacing
+A.~Fan, M.~Lewis, and Y.~Dauphin, ``Hierarchical neural story generation,''
+  \emph{CoRR}, vol. abs/1805.04833, 2018. [Online]. Available:
+  \url{http://arxiv.org/abs/1805.04833}
+\BIBentrySTDinterwordspacing
+
+\bibitem{DFAG2016}
+\BIBentryALTinterwordspacing
+Y.~N. Dauphin, A.~Fan, M.~Auli, and D.~Grangier, ``Language modeling with gated
+  convolutional networks,'' \emph{CoRR}, vol. abs/1612.08083, 2016. [Online].
+  Available: \url{http://arxiv.org/abs/1612.08083}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Voicebox}
+``Voicebox,'' \url{https://botnik.org/apps/writer/}, accessed: 2018-11-01.
+
+\end{thebibliography}

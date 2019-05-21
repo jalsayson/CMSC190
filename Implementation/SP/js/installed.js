@@ -192,7 +192,6 @@ class WordBag {
         this.bag = {};
         if(sequence !== undefined){
             for(var i = 0; i < sequence.length; i++) {
-                console.log(sequence[i]);
                 this.increment(sequence[i]);
             }
             this.printBag();
@@ -258,9 +257,6 @@ class PrefixTree {
 
         this.printAll = function(tree){
             var printHelper = function(tree, nav, word){
-                console.log(tree)
-                console.log(nav)
-                console.log(word)
                 if(nav.final){
                     console.log(word+nav.value);
                 }
@@ -287,7 +283,6 @@ class PrefixTree {
                     insertHelper(tree, tree.getNodeChild(nav, word[0]), popWord);
                 }
             }
-            console.log(wordInput)
             insertHelper(this, this.head, wordInput);
         }
 
@@ -342,7 +337,6 @@ const createSequence = function(source) {
     for(var i = 0; i < lines.length; i++) {
         var text = lines[i].split(" ");
         var len = text.length;
-        console.log(text);
         for (var j = 0; j < len; j++){
             sequence = sequence.concat([text[j]]);
         }
@@ -363,7 +357,6 @@ const cleanText = function(input) {
 
     var extraSpaceRegex = /[ ]+/g;
     result = result.replace(extraSpaceRegex, " ");
-    console.log(result);
 
     return result.trim();
 }
@@ -383,7 +376,6 @@ const initializeApplication = function() {
     }
 
     var entrySeq = createSequence(cleanText(entry));
-    console.log(entrySeq)
     var enTrie = new PrefixTree();
 
     for(var word of entrySeq) {

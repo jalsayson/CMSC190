@@ -200,7 +200,6 @@ class WordBag {
         this.bag = {};
         if(sequence !== undefined){
             for(var i = 0; i < sequence.length; i++) {
-                console.log(sequence[i]);
                 this.increment(sequence[i]);
             }
             this.printBag();
@@ -266,9 +265,6 @@ class PrefixTree {
 
         this.printAll = function(tree){
             var printHelper = function(tree, nav, word){
-                console.log(tree)
-                console.log(nav)
-                console.log(word)
                 if(nav.final){
                     console.log(word+nav.value);
                 }
@@ -295,7 +291,6 @@ class PrefixTree {
                     insertHelper(tree, tree.getNodeChild(nav, word[0]), popWord);
                 }
             }
-            console.log(wordInput)
             insertHelper(this, this.head, wordInput);
         }
 
@@ -350,7 +345,6 @@ const createSequence = function(source) {
     for(var i = 0; i < lines.length; i++) {
         var text = lines[i].split(" ");
         var len = text.length;
-        console.log(text);
         for (var j = 0; j < len; j++){
             sequence = sequence.concat([text[j]]);
         }
@@ -371,7 +365,6 @@ const cleanText = function(input) {
 
     var extraSpaceRegex = /[ ]+/g;
     result = result.replace(extraSpaceRegex, " ");
-    console.log(result);
 
     return result.trim();
 }
@@ -383,7 +376,6 @@ const cleanText = function(input) {
 const addInput = function(word, current, type) {
     var textarea = document.getElementById("text-space");
 
-    console.log(word)
     var beginning = textarea.value.substring(0, end);
 
     var middle = '';
@@ -411,8 +403,6 @@ const getMatrixResults = function(current) {
 
         var results = matrix.getTopRanks(current, result.keywords*2)
 
-        // console.log(results)
-
         displayResults(current, results, 'matrix');
     })
 }
@@ -420,8 +410,6 @@ const getMatrixResults = function(current) {
 const getPrefixTreeResults = function(current) {
     chrome.storage.local.get(['prefixTree', 'keywords'], function(result) {
         var tree = new PrefixTree(result.prefixTree);
-
-        // console.log(tree);
 
         var results = new PrefixTree(result.prefixTree).search(current, result.keywords*2);
 
@@ -463,8 +451,6 @@ const displayResults = function(current, results, type) {
         container.removeChild(container.firstChild);
     }
 
-    console.log(typeof results);
-
     if(typeof results == "object"){
         for(var i = 0; i < results.length/2; i++) {
             if(results[i] == "\n" || results[i] == "") {
@@ -494,7 +480,6 @@ const testCheck = function() {
     if(current == "") {
         var ministart = getStart(entry.value, end-1);
         current = entry.value.substring(ministart, end).trim();
-        console.log("matrix")
         if(current == "") {
             getMatrixResults("\n");
         }
@@ -504,7 +489,6 @@ const testCheck = function() {
     }
 
     else {
-        console.log("prefix tree")
         getPrefixTreeResults(current);
     }
 }
@@ -570,7 +554,6 @@ const on_run = function() {
     chrome.storage.local.get(['matrix'], function(result){
         if(result.matrix === undefined) {
             var wrap = document.getElementById("popup-wrap");
-            console.log(wrap);
             wrap.style.display = "none";
             var div = document.createElement("div");
             div.style.width = "300px;"
