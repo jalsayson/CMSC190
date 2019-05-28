@@ -1,4 +1,5 @@
 const updateDisplay = function() {
+    //changes the number in the keywords option
     var span = document.getElementById("count");
     var rangeSrc = document.getElementById("keyrange");
 
@@ -9,19 +10,20 @@ const updateDisplay = function() {
     })
 }
 
+const backToMain = function() {
+    window.location.href = "../html/popup.html";
+}
+
 const confirmDelete = function() {
+    //resets extension state without uninstalling and reinstalling the extension
     var del = confirm("Are you sure you would like to reset the application?");
     if(del) {
         chrome.storage.local.remove('matrix');
         chrome.storage.local.remove('prefixTree');
         chrome.storage.local.remove('keywords');
         chrome.storage.local.remove('initialized');
-        window.location.href = "../html/popup.html";
+        backToMain();
     }
-}
-
-const backToMain = function() {
-    window.location.href = "../html/popup.html";
 }
 
 const on_run = function() {

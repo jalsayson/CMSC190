@@ -126,7 +126,6 @@ input[type='submit']{
 }
 
 .opcolumn {
-    /* font-size: 50%; */
 }
 
 .column:hover, .opcolumn:hover{
@@ -147,7 +146,6 @@ input[type='submit']{
 #choices {
     text-align: center;
     padding: 5px;
-    /* width: 96.125%; */
 }
 
 #predictor {
@@ -159,7 +157,6 @@ input[type='submit']{
 }
 
 #settings-footer {
-    /* text-decoration: underline; */
     color: #77abff;
     cursor: pointer;
 }

@@ -2,7 +2,7 @@ import java.io.*;
 
 public class AutoPrefixTree {
     public static void main(String[] args) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("../SP/js/output.js"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("../SP/js/populatePrefix.js"))) {
 
             String source = "const populateTrie = function(){\n"+
                             "    var tree = new PrefixTree();\n\n";
@@ -10,8 +10,6 @@ public class AutoPrefixTree {
             String line = "";
             try (BufferedReader br = new BufferedReader(new FileReader("words_alpha.txt"))) {
                 while((line = br.readLine()) != null){
-                    // source = source + "    tree.insert(\""+ line +"\");\n";
-                    // System.out.println(line);
                     bw.write("    tree.insert(\""+ line +"\");\n");
                 }
             }
@@ -28,3 +26,8 @@ public class AutoPrefixTree {
         }
     }
 }
+
+/*
+This file is used to generate Javascript code for inserting the top 100 commonly used
+words according to the Oxford Dictionary Corpus.
+*/

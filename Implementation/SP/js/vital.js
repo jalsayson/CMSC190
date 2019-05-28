@@ -1,3 +1,5 @@
+//file containing the representations of the main data structures in the model
+
 /*****************************************************************
                                CLASSES
 *****************************************************************/
@@ -5,7 +7,6 @@
 /*---------------------------------------------------------------*/
 /*--------------------- NameProbabilityPair ---------------------*/
 /*---------------------------------------------------------------*/
-
 
 class NameProbabilityPair {
     constructor(name, value) {
@@ -34,10 +35,12 @@ class PredictionMatrix {
             }
         }
 
+        //get top words to be typed next given an input and the number of top ranks
         this.getTopRanks = function(word, ranks = 3) {
             var ranking = [];
             var result = [];
 
+            //comparison function for sorting
             var nppCompare = function(a, b) {
                 if(a.value > b.value) return -1;
                 if(a.value < b.value) return 1;
@@ -46,9 +49,13 @@ class PredictionMatrix {
 
             var keys = this.reference['keys'];
             for(var key of keys) {
+                //compute probability
                 var convertedPair = this.bayesComputation(word, key);
+                //add to ranking list
                 ranking = ranking.concat(new NameProbabilityPair(key, convertedPair));
+                //sort ranking
                 ranking.sort(nppCompare);
+                //slicing done in the loop to keep ranking array as small as possible
                 if(ranking.length > ranks) {
                     ranking = ranking.slice(0, ranks);
                 }
@@ -62,6 +69,7 @@ class PredictionMatrix {
         }
 
         this.bayesComputation = function(word, key) {
+            //mathematical computations and matrix accesses for computing probability. see paper for formula
             var aGivenB = function(pmat, a, b) {
                 return pmat.matrix[a][b];
             }
@@ -79,6 +87,7 @@ class PredictionMatrix {
         }
 
         this.merge = function(pm2) {
+            //merge two prediction matrices together
             this.reference['bag'].merge(pm2.reference['bag']);
             this.reference['keys'] = this.reference['bag'].keys();
             this.reference['sequence'] = mergeSequences(this.reference['sequence'], pm2.reference['sequence']);
@@ -104,6 +113,7 @@ class PredictionMatrix {
             }
         }
 
+        //code for instantiation
         if(matrixObject === undefined) {
             this.matrix = {};
             this.reference = {
@@ -131,6 +141,7 @@ class PredictionMatrix {
             }
         }
 
+        //reassigning functions to the object as functions are lost in local storage
         else {
             this.matrix = matrixObject.matrix;
             this.reference = matrixObject.reference;
@@ -271,6 +282,7 @@ class PrefixTree {
         }
 
         this.insert = function(wordInput){
+            //preorder traversal is performed to insert the word into the tree
             var insertHelper = function(tree, nav, word){
                 if(!tree.nodeHasChild(nav, word[0])) {
                     tree.newNodeChild(nav, word[0]);
@@ -287,6 +299,8 @@ class PrefixTree {
         }
 
         this.search = function(word, maxLength){
+            //the given word allows the tree navigator to go deeper before traversal proper begins
+            //used in creating a list of results for the popup for letter-level context
             var nav = this.head;
             var src = word;
             var results = [];

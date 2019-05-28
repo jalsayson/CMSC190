@@ -1,8 +1,4 @@
-/*
-DEVELOPMENT LINEUP:
-    - option/settings page
-*/
-
+//variables used in finding the point of reference when performing predictions
 var start = 0;
 var end = 0;
 var prev = null;
@@ -12,29 +8,27 @@ var prev = null;
 *****************************************************************/
 
 const addInput = function(word, current, type) {
+    //adds a word to the textarea in the popup.
     var textarea = document.getElementById("text-space");
-
     var beginning = textarea.value.substring(0, end);
-
     var middle = '';
+
     if(type == 'prefix') {
         middle =  word.substring(current.length, word.length);
     }
-
     else {
         middle = word;
     }
 
     var ending = " " + textarea.value.substring(end, textarea.value.length);
-
     end += word.length + 1;
-
     textarea.value = beginning + middle + ending;
 
     getMatrixResults(word);
 }
 
 const getMatrixResults = function(current) {
+    //load results given an input in a word-level context
     chrome.storage.local.get(['matrix', 'keywords'], function(result) {
         if(result.matrix !== undefined){
             var matrix = new PredictionMatrix(null, null, result.matrix);
@@ -48,6 +42,7 @@ const getMatrixResults = function(current) {
 }
 
 const getPrefixTreeResults = function(current) {
+    //load results given an input in a letter-level context
     chrome.storage.local.get(['prefixTree', 'keywords'], function(result) {
         var tree = new PrefixTree(result.prefixTree);
 
@@ -58,6 +53,7 @@ const getPrefixTreeResults = function(current) {
 }
 
 const createButton = function(current, option, type) {
+    //factory function for word options in the popup
     var div = document.createElement("div");
     div.className = "three column";
     div.innerHTML = option;
@@ -66,6 +62,7 @@ const createButton = function(current, option, type) {
 }
 
 const getStart = function(string, end) {
+    //get the start of the word to be used in getting inputs
     var start = end;
     do {
         //move cursor further back for spaces
@@ -86,6 +83,7 @@ const getStart = function(string, end) {
 }
 
 const displayResults = function(current, results, type) {
+    //place buttons as options in the popup
     var container = document.getElementById("choices");
     while(container.firstChild) {
         container.removeChild(container.firstChild);
@@ -108,6 +106,7 @@ const displayResults = function(current, results, type) {
 }
 
 const testCheck = function() {
+    //dynamic loading of options depending on what the user is currently typing on the text box
     var entry = document.getElementById("text-space");
     end = entry.selectionStart;
 
@@ -134,6 +133,7 @@ const testCheck = function() {
 }
 
 const updateNetwork = function() {
+    //update the four representations given the input in the text box
     var text = document.getElementById("text-space");
     var entry = text.value;
     if(entry == "") {
@@ -181,27 +181,12 @@ const copyText = function() {
     var text = document.getElementById("text-space");
     text.select();
     document.execCommand("copy");
-
-    // var copy = document.getElementById("copy-button");
-    // copy.innerHTML = "Link copied!";
-
-    // var start = new Date().getTime();
-    //
-    // while(true) {
-    //     var end = new Date().getTime() - start;
-    //     var seconds = Math.floor((end % (1000 * 60)) / 1000);
-    //
-    //     console.log(seconds);
-    //
-    //     if(seconds == 3) {
-    //         copy.innerHTML = "Copy to Clipboard";
-    //         break;
-    //     }
-    // }
 }
 
 const castToTextbox = function() {
     updateNetwork();
+
+    //casts the input in the text box to the DOM element stored in clickLoc in location.js, if any
     var text = document.getElementById("text-space").value;
     chrome.tabs.query({
         active : true,
@@ -229,26 +214,12 @@ const openSettings = function() {
 }
 
 const on_run = function() {
+    //checks first if the predictor's initial state has been created, as well as binds the functions to the buttons
+
     chrome.storage.local.get(['initialized'], function(result){
         if(result.initialized === undefined) {
             var wrap = document.getElementById("popup-wrap");
             wrap.style.display = "none";
-            // var div = document.createElement("div");
-            // div.style.width = "300px; !important"
-            // div.style.height = "400px !important;"
-            // div.style.margin = "8px; !important"
-            // div.innerHTML = "Initialize your predictor!";
-            //
-            // var link = document.createElement("a");
-            // link.innerHTML = "Go here!";
-            // link.style.color = "blue";
-            // link.style.textDecoration = "underline";
-            // link.style.cursor = "pointer";
-            // link.href = "../html/installed.html";
-            //
-            // div.appendChild(document.createElement("br"));
-            // div.appendChild(link);
-            // document.body.appendChild(div);
 
             window.location.href = "../html/installed.html";
         }
@@ -273,6 +244,7 @@ const on_run = function() {
     var src6 = document.getElementById("settings-button");
     src6.addEventListener("click", openSettings);
 
+    //get first results
     getMatrixResults("\n");
 }
 
