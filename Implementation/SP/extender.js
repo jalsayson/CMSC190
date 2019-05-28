@@ -75,7 +75,10 @@ var form_css_src = function(src, css_flag){
 }
 
 var form_interface = function(){
-    if(document.getElementById("predictor_wrapper") != null) return;
+    var cont = document.getElementById("predictor_wrapper");
+    if(cont != null) {
+        cont.style.display = "block";
+    }
 
     var predictor = form_container();
     var row = form_row();
@@ -127,7 +130,7 @@ var hide_predictor = function(){
 var bind_locator = function(element){
     var rect = element.getBoundingClientRect();
     console.log(rect.top + " : " + rect.left);
-    element.addEventListener("focusin", show_predictor());
+    element.addEventListener("focusin", form_interface());
     element.addEventListener("focusout", hide_predictor());
 }
 
@@ -142,7 +145,7 @@ var find_inputs = function(){
         for(tag of elems){
             if(tag.getAttribute("type") == "text" || tag.getAttribute("type") == "search"){
                 count++;
-                // bind_locator(tag);
+                bind_locator(tag);
             }
         }
     }

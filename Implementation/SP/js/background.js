@@ -63,5 +63,4 @@ let on_input_detection = function(event){
 }
 */
 
-// chrome.webNavigation.onCompleted.addListener(on_input_detection);
 chrome.runtime.onInstalled.addListener(on_install);

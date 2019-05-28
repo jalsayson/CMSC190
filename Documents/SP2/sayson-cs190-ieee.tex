@@ -48,20 +48,20 @@ Writing or typing time varies from person to person. For those with cognitive, p
 
 %A notable difference from the proposed application from the aforementioned Voicebox is the introduction of genre selection, which eliminates the limit of sticking only to one source material at a time. The mixture of genres produce more varied outputs, and at the same time, more inventive story concepts. 
 
-The application that was implemented as the main output of this study differs from the aforementioned Voicebox is the way the initial input is accepted. The application accepts user input as the initial data for the probability matrix and prefix tree, which are the two main data structures used for the application.
+The application that was implemented as the main output of this study differs from the aforementioned Voicebox is the way the initial input is accepted. The application accepts user input as the initial data for the probability matrix and a prefix tree, which are the two main data structures used for the application.
 
-This paper shall discuss the predictive text application in detail, as well as its implementation.
+This paper shall discuss the implementation for the text prediction, as well as the application interface for it.
 
 % OBJECTIVES
 \section{Objectives}
 
 \subsection{General Objective}
-The study aims to create an application that utilizes similar functionalities as a mobile prediction keyboard as an extension for the Google Chrome browser.
+The study aims to create a text prediction model that utilizes a probability matrix and a prefix tree as its data structures.
 
 \subsection{Specific Objectives}
 \begin{enumerate}{\setlabelwidth{1.}}
 
-\item[1.] Receive initial input from the user to instantiate the predictor application;
+\item[1.] Receive initial input from the user to instantiate the predictor;
 
 \item[2.] Use the probability matrix data structure in mapping word-level relation;
 
@@ -71,7 +71,7 @@ The study aims to create an application that utilizes similar functionalities as
 
 \item[5.] Allow user text selection to create texts and allow said texts to update previously mentioned data structures; and
 
-\item[6.] Assess user experience and program outputs using surveys.
+\item[6.] Assess the application created using the System Usability Scale.
 
 \end{enumerate}
 
@@ -146,6 +146,19 @@ This section contains the features of the implementation of the predictive text 
 \subsection{Application Implementation}
 The application was implemented using only JavaScript, along with the Chrome Extension API to integrate the application with the browser.
 
+\subsection{Prediction Model Visualization}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=65mm]{images/model.jpg}
+\caption{The model used in implementing the predictor.}
+
+\end{center}
+\end{figure}
+
+Fig. 1 illustrates the model used in the application, which shall be explained in the following sections.
+
 \subsection{Text Input Representations}
 \subsubsection{Sequence}
 The sequence is a simple array of strings from the input text, split by a single space (" ") delimiter.
@@ -161,7 +174,7 @@ The prefix tree uses the sequence representation to create the network of letter
 
 \subsection{Application Specifications}
 \subsubsection{Input}
-Upon installation of the extension, preliminary input data is accepted in a HTML page where the user is asked to enter it.
+Upon installation of the extension, preliminary input data is accepted in a HTML page where the user is asked to enter it. The prefix tree is also loaded with the top 100 common words (according to the Oxford English Corpus) \cite{OxfordFacts}, along with the words provided by the user.
 
 \subsubsection{Processing}
 Upon selection of the [Begin Predicting] button in the page for the newly-installed extension, these words are then converted into the four representations mentioned earlier.
@@ -254,112 +267,40 @@ Clicking the Open Settings button loads this screen. This contains the setting o
 \end{figure}
 
 \subsection{Application Evaluation}
-The application was evaluated by thirty respondents, not taking into account any personal information, just their experience with the application.
+The application was evaluated by thirty respondents through a survey, using the System Usability Scale as a guide (with small modifications for the statements to fit the context of the study). The respondents were to rate the statements provided by the survey from a 1-5, where 1 means that they completely disagree with the statement and 5 for the opposite.
 
-The survey questions asked for the user's evaluation about the following:
+The survey questions asked for the user's evaluation about the following, based on the statements from the System Usability Scale\cite{UsabilityGeeks}:
 
 \begin{enumerate}{\setlabelwidth{1.}}
 
-\item[1.]Accessibility of the application
+\item[1.] I think that I would like to use the application frequently.
 
-\item[2.]Word-level prediction accuracy
+\item[2.] I found the application unnecessarily complex.
 
-\item[3.]Letter-level prediction accuracy
+\item[3.] I thought the application was easy to use.
 
-\item[4.]Application robustness
+\item[4.] I think that I would need the support of a technical person to be able to use this application.
 
-\item[5.]Overall user experience
+\item[5.] I found the various functions in this application were well integrated.
 
-\item[6.]Overall application rating
-%\item[3.]Initial results
+\item[6.] I thought there was too much inconsistency in this application.
+
+\item[7.] I would imagine that most people would learn to use this application very quickly.
+
+\item[8.] I found the application very cumbersome to use.
+
+\item[9.] I felt very confident using the application.
+
+\item[10.] I needed to learn a lot of things before I could get going with this application.
+
 
 \end{enumerate}
-
-Here are the gathered results from the survey.
-
-\subsubsection{Accessibility of the Application}
-
-The input type for evaluating the accessibility of the application results was a linear range from 1 to 5, where 1 means that the application is not accessible at all while 5 means very accessible. The resulting average of the user's inputs result to 4.2667, which suggests that the application is generally easy to install and accessible to users involved.
-
-\subsubsection{Word-level Prediction Accuracy}
-
-The input type for evaluating the word-level prediction accuracy was also a linear range from 1 to 5, where 1 means that the word-level prediction is not accurate at all or it produces a wrong output while 5 means that it is very accurate. The resulting average of the user's inputs result to 4.2333, which suggests that the application performs word-level prediction with an above-average accuracy.
-
-\subsubsection{Letter-level Prediction Accuracy}
-
-The input type for evaluating the letter-level prediction accuracy was also a linear range from 1 to 5, where 1 means that the letter-level prediction is not accurate at all or it produces a wrong output while 5 means that it is very accurate. The resulting average of the user's inputs result to 4.4, which suggests that the application performs letter-level prediction with an above-average accuracy. However, it is of note that there is one instance of the letter-level prediction being inaccurate, leading to a single 1 response for this section.
-
-\subsubsection{Application Robustness}
-
-The input type for evaluating the application robustness was a multiple choice with the options being Yes or No. A 96.7 percentage of Yes responses suggest that the application generally works most of the time. It is worth noting that the person who responded with a No did not provide an error for the follow-up question.
-
-\subsubsection{Overall User Experience}
-
-The input type for evaluating the overall user experience was also a linear range from 1 to 5, where 1 means that the overall user experience was not intuitive for users while 5 suggests the opposite. The resulting average of the user's inputs result to 3.9, which means that the application does provide an interface that is intuitive enough but needs room for improvement.
-
-\subsubsection{Overall Application Rating}
-
-The input type for evaluating the overall application rating was also a linear range from 1 to 5, where 5 means that the application performs functionalities properly and correctly while 1 suggests the opposite. The resulting average of the user's inputs result to 4.2, which means that the application generally performs its functions without much issue.
-
-\begin{figure}[!ht]
-\begin{center}
-
-\includegraphics[width=80mm]{images/q1.png}
-\caption{Accessibility of application results}
-
-\end{center}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-
-\includegraphics[width=80mm]{images/q2.png}
-\caption{Word-level prediction accuracy results}
-
-\end{center}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-
-\includegraphics[width=80mm]{images/q3.png}
-\caption{Letter-level prediction accuracy results}
-
-\end{center}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-
-\includegraphics[width=80mm]{images/q4.png}
-\caption{Application robustness results}
-
-\end{center}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-
-\includegraphics[width=80mm]{images/q5.png}
-\caption{Overall user experience results}
-
-\end{center}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-
-\includegraphics[width=80mm]{images/q6.png}
-\caption{Overall application rating results}
-
-\end{center}
-\end{figure}
 
 % CONCLUSION AND FUTURE WORK
 \section{Conclusion and Future Work}
 The application produced was able to perform predictions both in the letter-level and the word-level, implemented using four representations of the text input. Upon evaluation, the application performs favorably under most conditions.
 
-However, during the evaluation through surveys, the comments stated that the user interface needed some work regarding text sizes and design consistency. Considering as the overall user experience received the least evaluation of 3.9, further enhancements to this component should be observed. Some comments also suggested the possibility of preloading a huge dataset of words into the prefix tree in order.
+%However, during the evaluation through surveys, the comments stated that the user interface needed some work regarding text sizes and design consistency. Considering as the overall user experience received the least evaluation of 3.9, further enhancements to this component should be observed. Some comments also suggested the possibility of preloading a huge dataset of words into the prefix tree in order.
 
 Some comments also considered using this kind of application for making predictions using tweets as an input, which would involve data mining for scraping tweets.
 
@@ -371,7 +312,7 @@ Some comments also considered using this kind of application for making predicti
 % BIOGRAPHY
 \begin{biography}
 [{\includegraphics{images/sayson.jpg}}]
-{John Alvin L. Sayson} is an undergraduate student of the University of the Philippines Los Ba\~{n}os. He likes to spend the day sleeping, playing games and occasionally playing music with his keyboard.
+{John Alvin L. Sayson} is an undergraduate student of the University of the Philippines Los Ba\~{n}os. He likes to spend the day sleeping, playing music games and occasionally using his trusty keyboard to play music.
 \end{biography}
 
 

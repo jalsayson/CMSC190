@@ -133,11 +133,11 @@ const testCheck = function() {
     }
 }
 
-const copyText = function() {
+const updateNetwork = function() {
     var text = document.getElementById("text-space");
     var entry = text.value;
     if(entry == "") {
-        alert("No input to copy!");
+        alert("No input to process!");
         return;
     }
 
@@ -173,9 +173,47 @@ const copyText = function() {
             }
         );
     });
+}
 
+const copyText = function() {
+    updateNetwork();
+
+    var text = document.getElementById("text-space");
     text.select();
     document.execCommand("copy");
+
+    // var copy = document.getElementById("copy-button");
+    // copy.innerHTML = "Link copied!";
+
+    // var start = new Date().getTime();
+    //
+    // while(true) {
+    //     var end = new Date().getTime() - start;
+    //     var seconds = Math.floor((end % (1000 * 60)) / 1000);
+    //
+    //     console.log(seconds);
+    //
+    //     if(seconds == 3) {
+    //         copy.innerHTML = "Copy to Clipboard";
+    //         break;
+    //     }
+    // }
+}
+
+const castToTextbox = function() {
+    updateNetwork();
+    var text = document.getElementById("text-space").value;
+    chrome.tabs.query({
+        active : true,
+        currentWindow : true
+    }, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            request : "getCastLocation",
+            text : text
+        }, function(response) {
+            console.log("yet");
+        });
+    })
 }
 
 const clearText = function() {
@@ -191,41 +229,49 @@ const openSettings = function() {
 }
 
 const on_run = function() {
-    chrome.storage.local.get(['matrix'], function(result){
-        if(result.matrix === undefined) {
+    chrome.storage.local.get(['initialized'], function(result){
+        if(result.initialized === undefined) {
             var wrap = document.getElementById("popup-wrap");
             wrap.style.display = "none";
-            var div = document.createElement("div");
-            div.style.width = "300px;"
-            div.style.height = "400px;"
-            div.style.padding = "8px;"
-            div.innerHTML = "Initialize your predictor!";
+            // var div = document.createElement("div");
+            // div.style.width = "300px; !important"
+            // div.style.height = "400px !important;"
+            // div.style.margin = "8px; !important"
+            // div.innerHTML = "Initialize your predictor!";
+            //
+            // var link = document.createElement("a");
+            // link.innerHTML = "Go here!";
+            // link.style.color = "blue";
+            // link.style.textDecoration = "underline";
+            // link.style.cursor = "pointer";
+            // link.href = "../html/installed.html";
+            //
+            // div.appendChild(document.createElement("br"));
+            // div.appendChild(link);
+            // document.body.appendChild(div);
 
-            var link = document.createElement("a");
-            link.innerHTML = "Go here!";
-            link.style.color = "blue";
-            link.style.textDecoration = "underline";
-            link.style.cursor = "pointer";
-            link.href = "../html/installed.html";
-
-            div.appendChild(document.createElement("br"));
-            div.appendChild(link);
-            document.body.appendChild(div);
+            window.location.href = "../html/installed.html";
         }
     });
 
     var src = document.getElementById("copy-button");
     src.addEventListener("click", copyText);
 
-    var src = document.getElementById("clear-button");
-    src.addEventListener("click", clearText);
+    var src2 = document.getElementById("update-button");
+    src2.addEventListener("click", updateNetwork);
 
-    var src2 = document.getElementById("text-space");
-    src2.addEventListener ("keyup", testCheck);
-    src2.addEventListener ("click", testCheck);
+    var src3 = document.getElementById("cast-button");
+    src3.addEventListener("click", castToTextbox);
 
-    var src3 = document.getElementById("settings-button");
-    src3.addEventListener("click", openSettings);
+    var src4 = document.getElementById("clear-button");
+    src4.addEventListener("click", clearText);
+
+    var src5 = document.getElementById("text-space");
+    src5.addEventListener ("keyup", testCheck);
+    src5.addEventListener ("click", testCheck);
+
+    var src6 = document.getElementById("settings-button");
+    src6.addEventListener("click", openSettings);
 
     getMatrixResults("\n");
 }

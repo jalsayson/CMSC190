@@ -14,45 +14,45 @@ Database file #1: ./sayson-cs190-ieee.bib
 Warning--empty journal in ZXLM2014
 
 Done.
-You've used 7 entries,
+You've used 9 entries,
             3975 wiz_defined-function locations,
-            848 strings with 8204 characters,
-and the built_in function-call counts, 4357 in all, are:
-= -- 351
-> -- 84
+            856 strings with 8540 characters,
+and the built_in function-call counts, 4969 in all, are:
+= -- 395
+> -- 86
 < -- 28
-+ -- 44
++ -- 46
 - -- 14
-* -- 224
-:= -- 718
-add.period$ -- 15
-call.type$ -- 7
-change.case$ -- 9
+* -- 242
+:= -- 816
+add.period$ -- 19
+call.type$ -- 9
+change.case$ -- 13
 chr.to.int$ -- 63
-cite$ -- 8
-duplicate$ -- 327
-empty$ -- 354
+cite$ -- 10
+duplicate$ -- 389
+empty$ -- 424
 format.name$ -- 19
-if$ -- 963
+if$ -- 1099
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 59
-newline$ -- 49
+int.to.str$ -- 9
+missing$ -- 73
+newline$ -- 55
 num.names$ -- 5
-pop$ -- 142
+pop$ -- 186
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 331
+skip$ -- 381
 stack$ -- 0
-substring$ -- 158
-swap$ -- 246
+substring$ -- 164
+swap$ -- 276
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 5
 type$ -- 0
 warning$ -- 1
 while$ -- 16
-width$ -- 8
-write$ -- 92
+width$ -- 10
+write$ -- 106
 (There was 1 warning)
