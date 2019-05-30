@@ -28,7 +28,7 @@
 
 % ABSTRACT
 \begin{abstract}
-With the advent of the digital age, communication has evolved to a point where technology is seamlessly integrated into day-to-day conversation. Primarily found in mobile phones, text prediction systems involves streamlining the communication by providing users with suggested words that they can select, based on the previous word they provided. This study aims to implement a similar technology, embedded in an application developed for the Chrome browser to provide the power of text prediction in desktop environments, in an application most users use in their day-to-day lives. The predictor was developed using two main and two minor text representations of the text input, of which is the probability matrix, the prefix tree, the sequence, and the bag-of-words respectively.
+With the advent of the digital age, communication has evolved to a point where technology is seamlessly integrated into day-to-day conversation. Primarily found in mobile phones, text prediction systems involves streamlining the communication by providing users with suggested words that they can select, based on the previous word they provided. This study aims to implement a similar technology, embedded in an application developed for the Chrome browser to provide the power of text prediction in desktop environments, in an application most users use in their day-to-day lives. The predictor was developed using various representations of the text input, where probability matrices and prefix trees provide the most importance.
 \end{abstract}
 
 % INDEX TERMS
@@ -38,11 +38,7 @@ text generation, text prediction, probability matrices, prefix trees
 
 % INTRODUCTION
 \section{Introduction}
-%Since its conception, literature has served as the backbone of human history, documenting various events that transpired in the past. Throughout the years, however, literature became a creative outlet, bringing forth various books and stories that defined multiple generations.
-
 Verbal communication was always been a vital component of human interaction. After all, it allows two people to be able to understand each other. With the influx and rapid growth of technology over the previous decades, new methods of communication in the digital age were conceived over that timespan.
-
-%It has always been humans that pioneered in creative writing, but in recent years it has become possible for artificial intelligence to write stories of their own, with information obtained from human sources.
 
 Nowadays, prediction keyboards are commonplace in mobile phones. Numerous mobile operating systems seamlessly integrate prediction into the existing keyboard functions to the point where people use it switching from the regular keyboard, to the prediction keyboard, and back again.
 
@@ -52,59 +48,33 @@ AIWriter\cite{AIWriter} and Botnik's Voicebox are these two applications. AIWrit
 
 Both website applications improve writing time by doing away with manual word-for-word typing, providing either words or complete paragraphs for the users to use right away. This study intends to provide a similar convenience.
 
-%writing time...
-%cite Text prediction systems: a survey here.
-Writing or typing time varies from person to person. For those with cognitive, perceptive, and/or physical disabilities, predictive text systems were their preferred medium in being able to communicate easier in social settings. \cite{GV2006} Being able to just use one tap to select words rather than multiple taps per letter, it allows for a great increase in convenience in conversation. As said before, predictive text systems are now embedded in various native keyboards in mobile phones, wherein continuous usage can further personalize the suggested words to the user. Through this, the rate of communication between people can improve. This application aims to achieve a similar goal to that of the common predictive text system. By providing an interface wherein users are given suggestions while in the middle of creating texts, they are able to utilize the power of mobile prediction keyboard functionalities.
+For those with cognitive, perceptive, and/or physical disabilities, predictive text systems were their preferred medium in being able to communicate easier in social settings. \cite{GV2006} Being able to just use one tap to select words rather than multiple taps per letter, it allows for a great increase in convenience when it comes to conversation. Over time, continuous usage of these systems can further personalize the suggested words to the user. Through this, the rate of communication between people can improve even further. This application aims to achieve a similar goal to that of the common predictive text system. By providing an interface wherein users are given suggestions while in the middle of creating texts, they are able to utilize the power of mobile prediction keyboard functionalities.
 
-%A notable difference from the proposed application from the aforementioned Voicebox is the introduction of genre selection, which eliminates the limit of sticking only to one source material at a time. The mixture of genres produce more varied outputs, and at the same time, more inventive story concepts. 
-
-The application that was implemented as the main output of this study differs from the aforementioned Voicebox is the way the initial input is accepted. The application accepts user input as the initial data for the probability matrix and a prefix tree, which are the two main data structures used for the application.
+The application that was implemented as the main output of this study differs from the aforementioned Voicebox in the way the initial input is accepted. The application accepts user input as the initial data for the probability matrix and a prefix tree, which are the two main data structures used for the application.
 
 This paper shall discuss the implementation for the text prediction, as well as the application interface for it.
 
-% OBJECTIVES
-\section{Objectives}
+Generally, the study aims to create a text prediction model that utilizes a probability matrix and a prefix tree as its data structures.
 
-\subsection{General Objective}
-The study aims to create a text prediction model that utilizes a probability matrix and a prefix tree as its data structures.
-
-\subsection{Specific Objectives}
+On a more specific standpoint the study aims to achieve the following:
 \begin{enumerate}{\setlabelwidth{1.}}
 
-\item[1.] Receive initial input from the user to instantiate the predictor;
+\item[1.] Produce a sequence and bag-of-words representation of input in order to create the probability matrix and prefix tree;
 
-\item[2.] Use the probability matrix data structure in mapping word-level relation;
+\item[2.] Create an application that will allow a user to interact with an instance of the text prediction model; and
 
-\item[3.] Use the prefix tree data structure in word prediction;
-
-\item[4.] Present word- and letter-level relation to the end user in the form of a predictive text writer application;
-
-\item[5.] Allow user to create text in the application and allow said text to update the aforementioned data structures; and
-
-\item[6.] Assess the application created using the System Usability Scale.
+\item[3.] Assess the application created and the perceived accuracy of the two levels of prediction through surveys.
 
 \end{enumerate}
+
+The inputs for the application only considered text that is typed using the default browser encoding. As such, languages that do not use this encoding is therefore not part of this study's scope.
 
 % RRL
 \section{Review of Related Literature}
 
-%\subsection{Previous UPLB and Non-UPLB Works on NLG}
-
-%\subsection{Concept Study of NLG}
-
-%\subsection{Expected Content of RRL}
-%\begin{enumerate}{\setlabelwidth{1.}}
-
-%\item[1.]3 Papers Studying Concepts Related to NLG
-
-%\item[2.]7 Papers on Related Studies (UPLB and non-UPLB)
-
-%\item[3.]Applications of Methodologies (based on nos. 1 and 2)
-
-%\end{enumerate}
-
 %ACTUAL CONTENT OF RRL
 To understand the possible applications and previous implementations of story and text generation, previous works in the field were observed.
+\pubidadjcol
 
 %\subsection{Previous Advances in Text and Literary Work Generation}
 %Online Works
@@ -114,7 +84,6 @@ Uchimoto, et al. presented various text-generation models in their paper wherein
 
 A table of input-output pairs were provided by the authors, with inputs being words in groups of threes and the outputs being complete sentences. From this, a possible limitation provided by their application was that it could only accept three inputs at a time.
 
-\pubidadjcol
 The authors have mentioned that the program was created for speakers that are not as fluent in Japanese be able to express sentences that they intend to speak but only know the main words that they want to express. This shows that text generation is not limited to recreational applications, and can be used for accessibility and elaboration. %continue...
 
 %Chinese Poetry Generation with Recurrent Neural Networks
@@ -124,9 +93,6 @@ The Chinese poems that they generated follow the quatrain format, wherein four l
 The poetry generator functions similarly to Uchimoto's 2002 paper where keywords are accepted to outline the poem's main concept.
 In creating the first line, a language model is used to rank candidates that satisfies criteria defined by the poetry format. Following lines are then based on the previous lines. This will ensure continuity from the first line to the last.
 
-%Hierarchal Neural Story Generation
-%A paper written by A. Fan, et al. in 2018 used generated sentence prompts that influences the resulting output.
-
 Text generation has also ventured into literary fields with less constraints, specifically story writing.
 
 In 2018, A. Fan, et al. added sentence prompt generation (aside from the expected story generation component) which was then based on to create the corresponding stories. \cite{FLD2018} These prompts are created using a convolutional language model, which contains a novel gated self-attention mechanism created by some of the authors. \cite{DFAG2016}
@@ -134,40 +100,12 @@ They also used a sequence-to-sequence network, a model that uses two recurrent n
 
 Results shown in the paper contained comparisons between the fusion model and another language model,  presenting the former's readability and higher quality of output over the latter. However, the authors mentioned that one of the limitations of the fusion model is the genericness of the prompts generated, compared to human prompts. This limits the results that can be generated as more specific and varied prompts can provide better results.
 
-%THEORETICAL FRAMEWORK
-%\section{Theoretical Framework}
-
 % METHODOLOGY
 \section {Methodology}
-%\subsection{Expected Content of Methodology}
-%\begin{enumerate}{\setlabelwidth{1.}}
+This section contains the technologies used in implementing the application, as well as a detailed look into the data structures used and the program flow of the model.
 
-%\item[1.]Model for the application
-
-%\item[2.]Details about prototype (backend content)
-
-%\item[3.]Initial results
-
-%\end{enumerate}
-
-%ACTUAL METHODOLOGY
-This section contains the features of the implementation of the predictive text application, as well as the evaluation procedures that follow thereafter.
-
-\subsection{Application Implementation}
-The application was implemented using only JavaScript, along with the Chrome Extension API to integrate the application with the browser.
-
-\subsection{Prediction Model Visualization}
-
-\begin{figure}[!ht]
-\begin{center}
-
-\includegraphics[width=65mm]{images/model.jpg}
-\caption{The model used in implementing the predictor.}
-
-\end{center}
-\end{figure}
-
-Fig. 1 illustrates the model used in the application, which shall be explained in the following sections.
+\subsection{Technologies Used}
+The application was implemented using only JavaScript, along with the Chrome Extension API to integrate the application with the browser. Java was used to clean and slice a text input from a file. The output was then used in another version of the resulting application (which is discussed in a later section).
 
 \subsection{Text Input Representations}
 \subsubsection{Sequence}
@@ -183,24 +121,35 @@ The probability matrix uses both previously mentioned representations to produce
 The prefix tree uses the sequence representation to create the network of letters.
 
 \subsection{Program Flow}
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=65mm]{images/model.jpg}
+\caption{The model used in implementing the predictor.}
+
+\end{center}
+\end{figure}
+
+Fig. 1 illustrates the model used in the application, which shall be explained in this section.
+
 \subsubsection{Input}
 Upon installation of the extension, preliminary input data is accepted in a HTML page where the user is asked to enter it. The prefix tree is also loaded with the top 100 common words (according to the Oxford English Corpus) \cite{OxfordFacts}, along with the words provided by the user.
 
 \subsubsection{Processing}
 Upon selection of the [Begin Predicting] button in the page for the newly-installed extension, these words are then converted into the four representations mentioned earlier.
 
-The created matrix and prefix tree is stored on the local storage of the browser. The bag-of-words and sequence representations are stored inside the matrix as reference.
-
 Before producing these representations of the text, the text is first cleaned in order to remove various characters and long spaces, which is vital for creating the sequence.
 
-When the user clicks on the [Copy to Clipboard] button on the Text Entry page, the new input is converted into the four representations like in the page for the newly-installed extension. However, instead of directly storing it in the local storage, the application retrieves the saved matrix and prefix tree and merges it with the new ones.
+The created matrix and prefix tree is stored in the local storage of the browser. The bag-of-words and sequence representations are stored inside the matrix as reference.
+
+In the Text Entry page, clicking on either Update Predictor, Copy to Clipboard, or Cast to Text Button converts the new input into the four representations. However, instead of directly storing it in the local storage, the application retrieves the saved matrix and prefix tree and merges it with the new ones.
 
 \subsubsection{Output}
 While typing in the available text box in the Text Entry Page, the caret location in said text box is used in determining the level of prediction for the next word. If the previously typed word has a space after it, it performs word-level prediction. Else, it performs letter-level prediction.
 
-Word-level prediction uses the matrix, which is why it was important to use the words that appeared in the inputs as the keys. Letter-level prediction uses the prefix tree.
+Word-level prediction uses the matrix, while letter-level prediction uses the prefix tree.
 
-Determining results from the letter-level prediction is just navigating the tree for each letter of the word to be searched and then adding all results from that point onward into an array.
+Determining results from the letter-level prediction involves navigating the tree for each letter of the word to be searched and then adding all results from that point onward into an array. It stops storing words when the size of the array reaches its maximum size (which is denoted by the number of keywords in the Settings page).
 
 For word-level prediction, the class NameProbabilityPair is used in arranging the most probable words by percentage. Determining the values for the NameProbabilityPair is defined using the equation from the Bayes' theorem, where A is the word to generate possible outputs from, and B is one of the candidate words:
 $$ P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)} $$
@@ -210,7 +159,9 @@ $$ P(A) = \frac{count(A)}{count(total)} $$
 
 The product of the two are then divided by the probability of B, obtained the same way as A.
 
-The results from these predictions are displayed on the area below the text box, the number which is defined by the user in Settings (default is 6).
+The NameProbabilityPairs are stored in an array. This array is sorted after every word checked. When this array exceeds the number defined by the user in Settings, the least ranking entry is removed in order to maintain the number of words returned.
+
+The results from these predictions are displayed on the area below the text box, the number which is defined by the user in Settings (default is 6). When these results are clicked, the application begins to look again for the possible words that come after it.
 
 \section{Results and Discussion}
 This section shall discuss the resulting interface, as well as the evaluation results.
@@ -225,13 +176,19 @@ This screen appears when the extension is installed or upon reset of the predict
 \begin{center}
 
 \includegraphics[width=65mm]{images/initial-input.png}
-\caption{The New Predictor screen with input posted.}
+\caption{The New Predictor screen with input.}
 
 \end{center}
 \end{figure}
 
 \subsubsection{Text Entry}
-This screen appears when the extension is installed. This also appears upon reset of the predictor.
+This screen appears after the initial state of the predictor has been created and saved to the local storage. This screen features four major functionalities: Update Predictor, Copy to Clipboard, Cast to Text Box, and Clear.
+
+When the Update Predictor button is clicked, the words in the text box are stored into the probability matrix and the prefix tree,
+
+Clicking on Copy to Clipboard does what the Update Predictor functionality does, and then it stores the text in the text box to the clipboard for pasting.
+
+Before clicking on the Cast to Text Box button, the user must have first clicked on a text box in the website they are currently on. The application accepts a few types of valid text boxes for casting: textarea elements, and input elements with types "text" and "search". After satisfying the prerequisite, clicking the button updates the predictor and places the text on the popup's text box to the text box in the website.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -242,7 +199,7 @@ This screen appears when the extension is installed. This also appears upon rese
 \end{center}
 \end{figure}
 
-Fig. 3 illustrates the word-level prediction for the previous input, which is the word "this".
+Fig. 4 illustrates the word-level prediction for the previous input, which is the word "this". On the other hand, Fig. 5 showcases the letter-level prediction functionality in the application with the input "a".
 
 \begin{figure}[!ht]
 \begin{center}
@@ -252,8 +209,6 @@ Fig. 3 illustrates the word-level prediction for the previous input, which is th
 
 \end{center}
 \end{figure}
-
-Fig. 4 showcases the letter-level prediction functionality in the application with the input "a". 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -265,7 +220,7 @@ Fig. 4 showcases the letter-level prediction functionality in the application wi
 \end{figure}
 
 \subsubsection{Settings}
-Clicking the Open Settings button loads this screen. This contains the setting of the number of keywords, as well as the option to reset the application to its default settings with an empty matrix, prefix tree, etc.
+Clicking the Open Settings button in the Text Entry loads this screen. This contains the slider for the number of keywords that will appear on the Text Entry, as well as the option to reset the application to its initial state.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -277,11 +232,11 @@ Clicking the Open Settings button loads this screen. This contains the setting o
 \end{figure}
 
 \subsection{Application Evaluation}
-The application was evaluated through a survey, using the System Usability Scale as a guide (with small modifications for the statements to fit the context of the study). The respondents were to rate the statements provided by the survey from a 1-5, where 1 means that they completely disagree with the statement and 5 for the opposite.
+The application was evaluated through a survey answered by twenty people selected at random, using the System Usability Scale as a guide (with small modifications for the statements to fit the context of the study). The respondents were to rate the statements provided by the survey from a 1-5, where 1 means that they completely disagree with the statement and 5 for the opposite.
 
-The application provided for testing consists of two versions. One version of the application is only preloaded with the previously mentioned top 100 words in the English language, and the other was preloaded with a passage of the book \textit{Harry Potter and the Philosopher's Stone}. This was done in order to compare user satisfaction from a newly installed version of the application versus another version where it simulates the performance of the application when it has been used for a longer time. These versions shall be called S (for small) and L (for large), respectively.
+The application provided for testing consists of two versions. One version of the application is only preloaded with the most common 100 words in the English language, and the other was preloaded with a passage of the book \textit{Harry Potter and the Philosopher's Stone}. This was done in order to compare user satisfaction from a newly installed version of the application versus another version where it simulates the performance of the application when it has been used for a longer time. These versions shall be called S (for small) and L (for large), respectively.
 
-These are the survey questions that quantified how much the testers agree with the statements based from the System Usability Scale\cite{UsabilityGeeks}:
+The following is a list of the survey questions based from the System Usability Scale\cite{UsabilityGeeks}:
 
 \begin{enumerate}{\setlabelwidth{1.}}
 
@@ -307,35 +262,155 @@ These are the survey questions that quantified how much the testers agree with t
 
 \end{enumerate}
 
-Two questions not derived from the System Usability Scale's template were added to evaluate the user's perceived accuracy of the word- and letter-level prediction functionality of the application.
+Getting a score from the SUS consists of the following steps, according to the same source:
 
 \begin{enumerate}{\setlabelwidth{1.}}
 
-\item[11.] I think that the word-level prediction for the application provides me with results I expect to appear.
+\item[1.] Subtract 1 from the scores on all odd-numbered statements.
 
-\item[12.] I think that the letter-level prediction for the application provides me with results I expect to appear.
+\item[2.] Subtract the score from 5 for all even-numbered statements.
+
+\item[3.] Get the total for all numbers, and multiply it by 2.5.
 
 \end{enumerate}
 
-Twenty people selected at random tested the program and submitted their responses to the survey. Before using the guidelines of the System Usability Scale in computing the application score, the weighted average amount for each statement was computed. The resulting score of the L version was 78.375, while the S version had a score of 76.875. According to the System Usability Scale, these scores are close to a grade of A (which is a score of 80.3). 
+These steps were followed to compute the score for each individual response, and those were averaged to obtain the scores for both versions. The resulting score of the L version was 75.8, while the S version had a score of 76.9. According to the source, these scores are below a grade of A (which is a score of 80.3), and above a grade of C (which is a score of 68).
 
-Based on the provided scores, the L version is preferred by the testers, presumably due to the larger set of words that the application has from the beginning.
+Aside from the questions derived from the System Usability Scale's template, two more were added to evaluate the user's perceived accuracy of the word- and letter-level prediction functionality of the application. This also followed the 1-5 rating scale of the previous ten questions.
 
-The scores 
+\begin{enumerate}{\setlabelwidth{1.}}
 
+\item[1.] I think that the word-level prediction for the application provides me with results I expect to appear.
 
-It is worth noting that the S version scored higher than the L version, despite the SUS evaluation providing the opposite result. A possible cause for this result is that the S version provides a smaller set of data, decreasing the amount of words that the testers expect to appear.
+\item[2.] I think that the letter-level prediction for the application provides me with results I expect to appear.
+
+\end{enumerate}
+
+As these two statements are not part of the System Usability Scale score computation, only the weighted average of the responses was used in comparing the two versions.
+
+The L version obtained the scores 4.4 and 4.3 for word- and level-letter level predictions respectively, while the S version obtained 4.45 and 4.25. It is worth noting that the S version was perceived to be more accurate than the L version with regards to word-level prediction, while the opposite was true for letter-level prediction.
 
 % CONCLUSION AND FUTURE WORK
 \section{Conclusion and Future Work}
-This study involves the development of a text prediction model implemented using a probability matrix and a prefix tree, as well as sequences and bag-of-words. This model was then used to develop an application as an extension for the Chrome browser similar to prediction keyboard systems commonly found in mobile phones.
+This study was able to create a text prediction model implemented using a probability matrix and a prefix tree, as well as sequences and bags-of-words. Through its evaluation as an application for the Chrome browser, it was able to obtain satisfactory results with regards to perceived accuracy and the usability of the application itself.
 
-Through user evaluation, the application was shown to have performed satisfactorily both in its usability as well as the perceived accuracy of the testers involved in the study.
-%The application produced was able to perform predictions both in the letter-level and the word-level, implemented using four representations of the text input. Upon evaluation, the application performs favorably under most conditions.
+The model does not perform optimization as the probability matrix and the prefix tree grows bigger with each user input. Future studies can look for ways to remove words with close-to-zero chances of appearing such that it will not contribute heavily to the size of the data structures.
 
-%However, during the evaluation through surveys, the comments stated that the user interface needed some work regarding text sizes and design consistency. Considering as the overall user experience received the least evaluation of 3.9, further enhancements to this component should be observed. Some comments also suggested the possibility of preloading a huge dataset of words into the prefix tree in order.
+For the application, testers provided suggestions to add keyboard functionality to it in order to streamline the user experience, as well as a ready-to-view manual so that users will not be lost in using the application. Accidentally saving wrongly-spelled words was one of the problems they faced, therefore minimizing the amount of saved spelling mistakes is something to look into in the future.
 
-%Some comments also considered using this kind of application for making predictions using tweets as an input, which would involve data mining for scraping tweets.
+Some comments also considered using this kind of application for making predictions using tweets as an input, which would involve data mining for scraping tweets.
+
+\appendices
+\section{Bar Graph Representation of User Responses}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s1.png}
+\caption{User response to the statement "I think that I would like to use the application frequently."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s2.png}
+\caption{User response to the statement "I found the application unnecessarily complex."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s3.png}
+\caption{User response to the statement "I thought the application was easy to use."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s4.png}
+\caption{User response to the statement "I think that I would need the support of a technical person to be able to use this application."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s5.png}
+\caption{User response to the statement "I found the various functions in this application were well integrated."}
+
+\end{center}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s6.png}
+\caption{User response to the statement "I thought there was too much inconsistency in this application."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s7.png}
+\caption{User response to the statement "I would imagine that most people would learn to use this application very quickly."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s8.png}
+\caption{User response to the statement "I found the application very cumbersome to use."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s9.png}
+\caption{User response to the statement "I felt very confident using the application."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s10.png}
+\caption{User response to the statement "I needed to learn a lot of things before I could get going with this application."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s11.png}
+\caption{User response to the statement "I think that the word-level prediction for the application provides me with results I expect to appear."}
+
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+
+\includegraphics[width=85mm]{images/s12.png}
+\caption{User response to the statement "I think that the letter-level prediction for the application provides me with results I expect to appear."}
+
+\end{center}
+\end{figure}
 
 % BIBLIOGRAPHY
 \bibliographystyle{./IEEE/IEEEtran}
@@ -345,7 +420,7 @@ Through user evaluation, the application was shown to have performed satisfactor
 % BIOGRAPHY
 \begin{biography}
 [{\includegraphics{images/sayson.jpg}}]
-{John Alvin L. Sayson} is an undergraduate student of the University of the Philippines Los Ba\~{n}os. He likes to spend the day sleeping, playing music games and occasionally using his trusty keyboard to play music.
+{John Alvin L. Sayson} is an undergraduate student of the University of the Philippines Los Ba\~{n}os. He likes to spend the day sleeping, listening to music, playing music games and occasionally making music with his keyboard.
 \end{biography}
 
 

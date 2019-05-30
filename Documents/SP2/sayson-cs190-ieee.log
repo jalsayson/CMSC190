@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.25)  29 MAY 2019 17:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.25)  30 MAY 2019 22:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -222,64 +222,139 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 27.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 27.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 114.
-
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 86.
  (/usr/local/texlive/2017basic/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 114.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 86.
 
 [1{/usr/local/texlive/2017basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-<images/model.jpg, id=11, 481.8pt x 722.7pt>
+<images/model.jpg, id=10, 481.8pt x 722.7pt>
 File: images/model.jpg Graphic file (type jpg)
  <use images/model.jpg>
-Package pdftex.def Info: images/model.jpg used on input line 164.
+Package pdftex.def Info: images/model.jpg used on input line 127.
 (pdftex.def)             Requested size: 184.9429pt x 277.40778pt.
  [2 <./images/model.jpg>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 206.
- <images/initial-input.png, id=15, 318.18875pt x 493.845pt>
+(Font)              <7> on input line 155.
+ <images/initial-input.png, id=15, 316.18124pt x 236.885pt>
 File: images/initial-input.png Graphic file (type png)
 
 <use images/initial-input.png>
-Package pdftex.def Info: images/initial-input.png used on input line 227.
-(pdftex.def)             Requested size: 184.9429pt x 287.04066pt.
+Package pdftex.def Info: images/initial-input.png used on input line 178.
+(pdftex.def)             Requested size: 184.9429pt x 138.5609pt.
 
 <images/initial-text-entry.png, id=17, 314.17375pt x 492.84125pt>
 File: images/initial-text-entry.png Graphic file (type png)
 
 <use images/initial-text-entry.png>
-Package pdftex.def Info: images/initial-text-entry.png used on input line 239.
+Package pdftex.def Info: images/initial-text-entry.png used on input line 196.
 (pdftex.def)             Requested size: 184.9429pt x 290.11203pt.
- [3 <./images/initial-input.png> <./images/initial-text-entry.png>]
-<images/word-level-prediction.png, id=26, 315.1775pt x 496.85625pt>
+
+<images/word-level-prediction.png, id=18, 315.1775pt x 496.85625pt>
 File: images/word-level-prediction.png Graphic file (type png)
 
 <use images/word-level-prediction.png>
-Package pdftex.def Info: images/word-level-prediction.png used on input line 25
-0.
+Package pdftex.def Info: images/word-level-prediction.png used on input line 20
+7.
 (pdftex.def)             Requested size: 184.9429pt x 291.55054pt.
 
-<images/letter-level-prediction.png, id=27, 315.1775pt x 492.84125pt>
+<images/letter-level-prediction.png, id=19, 315.1775pt x 492.84125pt>
 File: images/letter-level-prediction.png Graphic file (type png)
 
 <use images/letter-level-prediction.png>
 Package pdftex.def Info: images/letter-level-prediction.png used on input line 
-261.
+216.
 (pdftex.def)             Requested size: 184.9429pt x 289.19458pt.
 
-<images/settings.png, id=28, 315.1775pt x 191.71625pt>
+<images/settings.png, id=20, 315.1775pt x 191.71625pt>
 File: images/settings.png Graphic file (type png)
 
 <use images/settings.png>
-Package pdftex.def Info: images/settings.png used on input line 273.
+Package pdftex.def Info: images/settings.png used on input line 228.
 (pdftex.def)             Requested size: 184.9429pt x 112.49727pt.
- [4 <./images/word-level-prediction.png> <./images/letter-level-prediction.png>
- <./images/settings.png>] (./sayson-cs190-ieee.bbl
+ [3 <./images/initial-input.png>] [4 <./images/initial-text-entry.png> <./image
+s/word-level-prediction.png> <./images/letter-level-prediction.png> <./images/s
+ettings.png>]
+<images/s1.png, id=35, 1204.5pt x 803.0pt>
+File: images/s1.png Graphic file (type png)
+ <use images/s1.png>
+Package pdftex.def Info: images/s1.png used on input line 309.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s2.png, id=36, 1204.5pt x 803.0pt>
+File: images/s2.png Graphic file (type png)
+ <use images/s2.png>
+Package pdftex.def Info: images/s2.png used on input line 318.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s3.png, id=37, 1204.5pt x 803.0pt>
+File: images/s3.png Graphic file (type png)
+ <use images/s3.png>
+Package pdftex.def Info: images/s3.png used on input line 327.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s4.png, id=38, 1204.5pt x 803.0pt>
+File: images/s4.png Graphic file (type png)
+ <use images/s4.png>
+Package pdftex.def Info: images/s4.png used on input line 336.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s5.png, id=39, 1204.5pt x 803.0pt>
+File: images/s5.png Graphic file (type png)
+ <use images/s5.png>
+Package pdftex.def Info: images/s5.png used on input line 345.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s6.png, id=40, 1204.5pt x 803.0pt>
+File: images/s6.png Graphic file (type png)
+ <use images/s6.png>
+Package pdftex.def Info: images/s6.png used on input line 355.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s7.png, id=41, 1204.5pt x 803.0pt>
+File: images/s7.png Graphic file (type png)
+ <use images/s7.png>
+Package pdftex.def Info: images/s7.png used on input line 364.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s8.png, id=42, 1204.5pt x 803.0pt>
+File: images/s8.png Graphic file (type png)
+ <use images/s8.png>
+Package pdftex.def Info: images/s8.png used on input line 373.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s9.png, id=43, 1204.5pt x 803.0pt>
+File: images/s9.png Graphic file (type png)
+ <use images/s9.png>
+Package pdftex.def Info: images/s9.png used on input line 382.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s10.png, id=44, 1204.5pt x 803.0pt>
+File: images/s10.png Graphic file (type png)
+ <use images/s10.png>
+Package pdftex.def Info: images/s10.png used on input line 391.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s11.png, id=45, 1204.5pt x 803.0pt>
+File: images/s11.png Graphic file (type png)
+ <use images/s11.png>
+Package pdftex.def Info: images/s11.png used on input line 400.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+<images/s12.png, id=46, 1204.5pt x 803.0pt>
+File: images/s12.png Graphic file (type png)
+ <use images/s12.png>
+Package pdftex.def Info: images/s12.png used on input line 409.
+(pdftex.def)             Requested size: 241.84842pt x 161.22205pt.
+
+(./sayson-cs190-ieee.bbl [5 <./images/s1.png> <./images/s2.png> <./images/s3.pn
+g>] [6 <./images/s4.png> <./images/s5.png> <./images/s6.png> <./images/s7.png> 
+<./images/s8.png> <./images/s9.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 61--64
 []\OT1/ptm/m/n/8 ``The oec: Facts about the lan-guage,''
  []
@@ -290,39 +365,40 @@ Overfull \hbox (41.2215pt too wide) in paragraph at lines 61--64
 ries.com/words/the-
  []
 
-) <images/sayson.jpg, id=35, 60.225pt x 76.285pt>
+) <images/sayson.jpg, id=62, 60.225pt x 76.285pt>
 File: images/sayson.jpg Graphic file (type jpg)
  <use images/sayson.jpg>
-Package pdftex.def Info: images/sayson.jpg used on input line 343.
+Package pdftex.def Info: images/sayson.jpg used on input line 423.
 (pdftex.def)             Requested size: 60.22484pt x 76.2848pt.
 File: images/sayson.jpg Graphic file (type jpg)
 
 <use images/sayson.jpg>
-Package pdftex.def Info: images/sayson.jpg used on input line 343.
+Package pdftex.def Info: images/sayson.jpg used on input line 423.
 (pdftex.def)             Requested size: 60.22484pt x 76.2848pt.
- [5 <./images/sayson.jpg>] (./sayson-cs190-ieee.aux) ) 
+ [7 <./images/s10.png> <./images/s11.png> <./images/s12.png> <./images/sayson.j
+pg>] (./sayson-cs190-ieee.aux) ) 
 Here is how much of TeX's memory you used:
- 2235 strings out of 494437
- 35458 string characters out of 6166645
- 97101 words of memory out of 5000000
- 5560 multiletter control sequences out of 15000+600000
+ 2295 strings out of 494437
+ 36397 string characters out of 6166645
+ 98101 words of memory out of 5000000
+ 5608 multiletter control sequences out of 15000+600000
  38658 words of font info for 72 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 39i,10n,37p,953b,286s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2017b
-asic/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2017basic/texmf
--dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017basic/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2017basi
-c/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017
-basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
-017basic/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017ba
-sic/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2017basic/
-texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017basic/texmf
--dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on sayson-cs190-ieee.pdf (5 pages, 251672 bytes).
+ 39i,10n,37p,844b,286s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2017basic/texmf-dist/fonts/
+enc/dvips/base/8r.enc}</usr/local/texlive/2017basic/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017basic/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2017basic/texmf-dist/fo
+nts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/t
+ype1/urw/times/utmbi8a.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1
+/urw/times/utmr8a.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on sayson-cs190-ieee.pdf (7 pages, 541508 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 38 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 96 words of extra memory for PDF output out of 10000 (max. 10000000)
 
