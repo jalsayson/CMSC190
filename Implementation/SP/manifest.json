@@ -1,7 +1,7 @@
 {
-    "name" : "SP Project",
-    "version" : "0.0.1",
-    "description" : "Add a predictive text system to your favorite social media websites!",
+    "name" : "Text Predictor",
+    "version" : "1.0.0",
+    "description" : "Add a predictive text system to your Chrome browser!",
     "permissions" : [
         "http://*/*",
         "https://*/*",

@@ -14,7 +14,7 @@
         
 \markboth{CMSC 190 Special Problem, \ICS}{}
 \title{\SPTITLE}
-\author{\ADVISEE
+\author{\ADVISEE~and~\ADVISER
 \REMARK
 }
 \pubid{\copyright~2019~ICS \UPLB}
@@ -25,6 +25,16 @@
 
 % TITLE
 \maketitle
+
+% ABSTRACT
+\begin{abstract}
+With the advent of the digital age, communication has evolved to a point where technology is seamlessly integrated into day-to-day conversation. Primarily found in mobile phones, text prediction systems involves streamlining the communication by providing users with suggested words that they can select, based on the previous word they provided. This study aims to implement a similar technology, embedded in an application developed for the Chrome browser to provide the power of text prediction in desktop environments, in an application most users use in their day-to-day lives. The predictor was developed using two main and two minor text representations of the text input, of which is the probability matrix, the prefix tree, the sequence, and the bag-of-words respectively.
+\end{abstract}
+
+% INDEX TERMS
+\begin{keywords}
+text generation, text prediction, probability matrices, prefix trees
+\end{keywords}
 
 % INTRODUCTION
 \section{Introduction}
@@ -67,9 +77,9 @@ The study aims to create a text prediction model that utilizes a probability mat
 
 \item[3.] Use the prefix tree data structure in word prediction;
 
-\item[4.] Present word- and letter-level relation to the end user in the form of a predictive text writer interface;
+\item[4.] Present word- and letter-level relation to the end user in the form of a predictive text writer application;
 
-\item[5.] Allow user text selection to create texts and allow said texts to update previously mentioned data structures; and
+\item[5.] Allow user to create text in the application and allow said text to update the aforementioned data structures; and
 
 \item[6.] Assess the application created using the System Usability Scale.
 
@@ -172,7 +182,7 @@ The probability matrix uses both previously mentioned representations to produce
 \subsubsection{Prefix Tree}
 The prefix tree uses the sequence representation to create the network of letters.
 
-\subsection{Application Specifications}
+\subsection{Program Flow}
 \subsubsection{Input}
 Upon installation of the extension, preliminary input data is accepted in a HTML page where the user is asked to enter it. The prefix tree is also loaded with the top 100 common words (according to the Oxford English Corpus) \cite{OxfordFacts}, along with the words provided by the user.
 
@@ -232,23 +242,23 @@ This screen appears when the extension is installed. This also appears upon rese
 \end{center}
 \end{figure}
 
-As mentioned before, the number of words that appear in the option below can be modified by the user in Settings. Fig. 3 illustrates that functionality, as well as the word-level prediction for the previous input, which is the word "this".
+Fig. 3 illustrates the word-level prediction for the previous input, which is the word "this".
 
 \begin{figure}[!ht]
 \begin{center}
 
 \includegraphics[width=65mm]{images/word-level-prediction.png}
-\caption{The Text Entry screen with more keywords.}
+\caption{Word-level prediction functionality.}
 
 \end{center}
 \end{figure}
 
-Fig. 4 showcases the letter-level prediction functionality in the application with the input "ap". Do note that the other words were placed manually before this screenshot.
+Fig. 4 showcases the letter-level prediction functionality in the application with the input "a". 
 
 \begin{figure}[!ht]
 \begin{center}
 
-\includegraphics[width=65mm]{images/text-level-prediction.png}
+\includegraphics[width=65mm]{images/letter-level-prediction.png}
 \caption{Letter-level prediction functionality.}
 
 \end{center}
@@ -267,9 +277,11 @@ Clicking the Open Settings button loads this screen. This contains the setting o
 \end{figure}
 
 \subsection{Application Evaluation}
-The application was evaluated by thirty respondents through a survey, using the System Usability Scale as a guide (with small modifications for the statements to fit the context of the study). The respondents were to rate the statements provided by the survey from a 1-5, where 1 means that they completely disagree with the statement and 5 for the opposite.
+The application was evaluated through a survey, using the System Usability Scale as a guide (with small modifications for the statements to fit the context of the study). The respondents were to rate the statements provided by the survey from a 1-5, where 1 means that they completely disagree with the statement and 5 for the opposite.
 
-The survey questions asked for the user's evaluation about the following, based on the statements from the System Usability Scale\cite{UsabilityGeeks}:
+The application provided for testing consists of two versions. One version of the application is only preloaded with the previously mentioned top 100 words in the English language, and the other was preloaded with a passage of the book \textit{Harry Potter and the Philosopher's Stone}. This was done in order to compare user satisfaction from a newly installed version of the application versus another version where it simulates the performance of the application when it has been used for a longer time. These versions shall be called S (for small) and L (for large), respectively.
+
+These are the survey questions that quantified how much the testers agree with the statements based from the System Usability Scale\cite{UsabilityGeeks}:
 
 \begin{enumerate}{\setlabelwidth{1.}}
 
@@ -293,16 +305,37 @@ The survey questions asked for the user's evaluation about the following, based 
 
 \item[10.] I needed to learn a lot of things before I could get going with this application.
 
+\end{enumerate}
+
+Two questions not derived from the System Usability Scale's template were added to evaluate the user's perceived accuracy of the word- and letter-level prediction functionality of the application.
+
+\begin{enumerate}{\setlabelwidth{1.}}
+
+\item[11.] I think that the word-level prediction for the application provides me with results I expect to appear.
+
+\item[12.] I think that the letter-level prediction for the application provides me with results I expect to appear.
 
 \end{enumerate}
 
+Twenty people selected at random tested the program and submitted their responses to the survey. Before using the guidelines of the System Usability Scale in computing the application score, the weighted average amount for each statement was computed. The resulting score of the L version was 78.375, while the S version had a score of 76.875. According to the System Usability Scale, these scores are close to a grade of A (which is a score of 80.3). 
+
+Based on the provided scores, the L version is preferred by the testers, presumably due to the larger set of words that the application has from the beginning.
+
+The scores 
+
+
+It is worth noting that the S version scored higher than the L version, despite the SUS evaluation providing the opposite result. A possible cause for this result is that the S version provides a smaller set of data, decreasing the amount of words that the testers expect to appear.
+
 % CONCLUSION AND FUTURE WORK
 \section{Conclusion and Future Work}
-The application produced was able to perform predictions both in the letter-level and the word-level, implemented using four representations of the text input. Upon evaluation, the application performs favorably under most conditions.
+This study involves the development of a text prediction model implemented using a probability matrix and a prefix tree, as well as sequences and bag-of-words. This model was then used to develop an application as an extension for the Chrome browser similar to prediction keyboard systems commonly found in mobile phones.
+
+Through user evaluation, the application was shown to have performed satisfactorily both in its usability as well as the perceived accuracy of the testers involved in the study.
+%The application produced was able to perform predictions both in the letter-level and the word-level, implemented using four representations of the text input. Upon evaluation, the application performs favorably under most conditions.
 
 %However, during the evaluation through surveys, the comments stated that the user interface needed some work regarding text sizes and design consistency. Considering as the overall user experience received the least evaluation of 3.9, further enhancements to this component should be observed. Some comments also suggested the possibility of preloading a huge dataset of words into the prefix tree in order.
 
-Some comments also considered using this kind of application for making predictions using tweets as an input, which would involve data mining for scraping tweets.
+%Some comments also considered using this kind of application for making predictions using tweets as an input, which would involve data mining for scraping tweets.
 
 % BIBLIOGRAPHY
 \bibliographystyle{./IEEE/IEEEtran}

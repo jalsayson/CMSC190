@@ -17,7 +17,8 @@ document.addEventListener("click", function(event) {
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     //communicates with the popup when the application wants to cast text to a textbox
-    if(request.request == "getCastLocation") {
+    if(request.request == "getCastLocation" && clickLoc != null) {
         clickLoc.value = request.text;
+        sendResponse({text : "cast ok!"});
     }
 })
