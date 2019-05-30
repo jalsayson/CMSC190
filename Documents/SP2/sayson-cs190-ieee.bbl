@@ -21,6 +21,9 @@
 \bibitem{AIWriter}
 ``Aiwriter,'' \url{http://www.ai-writer.com/}, accessed: 2018-11-01.
 
+\bibitem{Voicebox}
+``Voicebox,'' \url{https://botnik.org/apps/writer/}, accessed: 2018-11-01.
+
 \bibitem{GV2006}
 \BIBentryALTinterwordspacing
 N.~"Garay-Vitoria and J.~Abascal, ``"text prediction systems: a survey",''
@@ -67,8 +70,5 @@ Y.~N. Dauphin, A.~Fan, M.~Auli, and D.~Grangier, ``Language modeling with gated
   website,''
   \url{https://usabilitygeek.com/how-to-use-the-system-usability-scale-sus-to-evaluate-the-usability-of-your-website/},
   accessed: 2019-05-26.
-
-\bibitem{Voicebox}
-``Voicebox,'' \url{https://botnik.org/apps/writer/}, accessed: 2018-11-01.
 
 \end{thebibliography}

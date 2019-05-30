@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.25)  30 MAY 2019 22:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.8.25)  30 MAY 2019 22:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -355,12 +355,12 @@ Package pdftex.def Info: images/s12.png used on input line 409.
 (./sayson-cs190-ieee.bbl [5 <./images/s1.png> <./images/s2.png> <./images/s3.pn
 g>] [6 <./images/s4.png> <./images/s5.png> <./images/s6.png> <./images/s7.png> 
 <./images/s8.png> <./images/s9.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 61--64
+Underfull \hbox (badness 10000) in paragraph at lines 64--67
 []\OT1/ptm/m/n/8 ``The oec: Facts about the lan-guage,''
  []
 
 
-Overfull \hbox (41.2215pt too wide) in paragraph at lines 61--64
+Overfull \hbox (41.2215pt too wide) in paragraph at lines 64--67
 \OT1/ptm/m/n/8 https://web.archive.org/web/20111226085859/http://oxforddictiona
 ries.com/words/the-
  []
@@ -395,7 +395,7 @@ nts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/t
 ype1/urw/times/utmbi8a.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1
 /urw/times/utmr8a.pfb></usr/local/texlive/2017basic/texmf-dist/fonts/type1/urw/
 times/utmri8a.pfb>
-Output written on sayson-cs190-ieee.pdf (7 pages, 541570 bytes).
+Output written on sayson-cs190-ieee.pdf (7 pages, 541550 bytes).
 PDF statistics:
  98 PDF objects out of 1000 (max. 8388607)
  44 compressed objects within 1 object stream
